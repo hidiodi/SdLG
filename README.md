@@ -24,12 +24,15 @@ Install with the locked `uv` command in
 
 ## Repository status
 
-Every frozen-paper study has a public launch command, a compact versioned
-record, and an auditable output contract. `uv run python
-scripts/reproduce.py audit` verifies reported values and rebuilds the released
-tables and empirical figures. Long PPO runs are intentionally not executed by
-the audit. See [`docs/MISSING_RELEASE_ITEMS.md`](docs/MISSING_RELEASE_ITEMS.md)
-for conservative limits on fresh-run validation.
+Every main-result study has a public full-run command, a compact versioned
+record, and an auditable output contract. Appendix H.2 is released as verified
+compact records plus the versioned implementation patch for its sensitivity
+condition; it deliberately does not replace the main-result runner. `uv run
+python scripts/reproduce.py audit` verifies reported values and rebuilds the
+released tables and empirical figures. Long PPO runs are intentionally not
+executed by the audit. See
+[`docs/MISSING_RELEASE_ITEMS.md`](docs/MISSING_RELEASE_ITEMS.md) for the
+remaining hardening work and limits on fresh-run validation.
 
 ## License
 
