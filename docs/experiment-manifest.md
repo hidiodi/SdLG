@@ -26,6 +26,7 @@ project experiments.
 | --- | --- | --- | --- |
 | `T1-TMAZE-EXECUTION-PHASE` | Passive T-Maze Exact/Approximate x RoPE/NoRoPE factorial | `uv run python scripts/reproduce.py run tmaze-historical` | 4 configurations, 10 seeds each, train at H=100 and evaluate H=100/150/200. |
 | `T1-TMAZE-MATCHED-EXECUTION` | Topology- and gradient-matched T-Maze Exact vs Approximate | `uv run python scripts/reproduce.py run tmaze-matched` | 2 configurations, 10 seeds each, matched three-block NoRoPE execution. |
+| `H2-EXECUTION-SEMANTICS-ABLATION` | Joint local-buffer/counter execution sensitivity | `uv run python scripts/reproduce.py dry-run execution-semantics` | Compact records for 60 modified-execution T-Maze endpoints and five modified DoorKey Exact endpoints; the versioned patch is applied only for an isolated sensitivity rerun. |
 | `T3-TMAZE-EXTERNAL-LANDSCAPE` | T-Maze recurrent baseline landscape | `uv run python scripts/reproduce.py run tmaze-baselines` | Eight baseline configurations, seven seeds, a 50M-step budget, and frozen early-stop/evaluation protocol. |
 | `T1-MINIGRID-LOCAL-WINDOW` | MemoryS16 local-window ablation | `uv run python scripts/reproduce.py run minigrid-locality` | Approximate SdLG with SWA enabled/bypassed; 15 seeds per condition. |
 | `T3-MINIGRID-DOORKEY-8X8` | DoorKey-8x8 cross-family comparison | `uv run python scripts/reproduce.py run doorkey-8x8` | Exact SdLG, GRU, and GTrXL; 5 seeds per model. |

@@ -40,6 +40,7 @@ source tree.
 uv run python scripts/reproduce.py show tmaze-historical
 uv run python scripts/reproduce.py run tmaze-historical
 uv run python scripts/reproduce.py run tmaze-matched
+uv run python scripts/reproduce.py dry-run execution-semantics
 uv run python scripts/reproduce.py run tmaze-baselines
 
 uv run python scripts/reproduce.py run minigrid-locality
@@ -65,6 +66,11 @@ The Craftax T=64 landscape and cross-T commands use a protocol adapter that
 launches each long job in a fresh watchdog-compatible process. Validate either
 matrix without training with `uv run python scripts/reproduce.py dry-run
 craftax-landscape` or `craftax-cross-t`.
+
+Appendix H.2 is a sensitivity analysis, not the default implementation behind
+the paper's main figures. Its compact seed-level records and exact source patch
+are checked by `dry-run execution-semantics`; do not apply that patch to a
+main-result rerun.
 
 The Craftax and full POPGym protocols are expensive. They should be launched
 only on the documented ROCm target after a successful audit. Use this
@@ -92,8 +98,7 @@ WANDB_MODE=offline uv run python scripts/diagnostics/exact_sdlg/popgym_benchmark
 The complete paper-study inventory, seeds, budgets, and intended outputs are
 in [experiment-manifest.md](experiment-manifest.md).  The current claim,
 record, and verification status are tracked in
-[TEMP_experiment_value_ledger.md](TEMP_experiment_value_ledger.md) until the
-release audit is complete.
+[experiment_value_ledger.md](experiment_value_ledger.md).
 
 The empirical figure-to-record mapping is in
 [figure-catalog.md](figure-catalog.md). The table equivalent is in

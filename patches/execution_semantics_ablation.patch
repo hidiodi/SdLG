@@ -1,0 +1,75 @@
+--- a/src/models/common/sdlg_hybrid.py
++++ b/src/models/common/sdlg_hybrid.py
+@@ -161,16 +161,16 @@ class GatedSlidingWindowAttention(nn.Module):
+             carry_v = swa_carry_v * (1.0 - term)
+ 
+             resetted_step_count = carry_step_count * (1.0 - term)
+-            write_idx = jnp.mod(resetted_step_count, W).astype(jnp.int32)
+-
+-            new_swa_k = carry_k.at[write_idx].set(k[0])
+-            new_swa_v = carry_v.at[write_idx].set(v[0])
++            # Keep the same chronological, right-aligned layout as the
++            # sequence path, including partially filled buffers after reset.
++            new_swa_k = jnp.concatenate([carry_k[1:], k], axis=0)
++            new_swa_v = jnp.concatenate([carry_v[1:], v], axis=0)
+ 
+             logits = jnp.einsum('t d, s d -> t s', q, new_swa_k) / jnp.sqrt(self.d_k + 1e-8)
+ 
+             s_idx = jnp.arange(W)
+-            valid_count = jnp.minimum(resetted_step_count + 1, W)
+-            valid_mask = s_idx < valid_count
++            valid_count = jnp.minimum(resetted_step_count + 1, W_active)
++            valid_mask = s_idx >= W - valid_count
+             logits = jnp.where(valid_mask[None, :], logits, -jnp.inf)
+ 
+             attn_weights = jax.nn.softmax(logits, axis=-1)
+@@ -202,7 +202,7 @@ class GatedAttentionGLALayer(nn.Module):
+         omegas = jnp.linspace(-jnp.pi, jnp.pi, self.r)
+ 
+         def compute_step_count(carry, term):
+-            next_step = (carry + 1.0) * (1.0 - term)
++            next_step = carry * (1.0 - term) + 1.0
+             return next_step, next_step
+ 
+         def compute_phases(carry_theta, term):
+@@ -214,7 +214,7 @@ class GatedAttentionGLALayer(nn.Module):
+             _, step_counts = jax.lax.scan(compute_step_count, carry_step_count, terminations)
+             _, theta = jax.lax.scan(compute_phases, theta_prev, terminations)
+         else:
+-            step_counts = jnp.expand_dims((carry_step_count + 1.0) * (1.0 - terminations[0]), axis=0)
++            step_counts = jnp.expand_dims(carry_step_count * (1.0 - terminations[0]) + 1.0, axis=0)
+             resetted_theta = theta_prev * (1.0 - terminations[0])
+             theta = jnp.expand_dims((resetted_theta + omegas) % (2 * jnp.pi), axis=0)
+ 
+@@ -315,13 +315,13 @@ class BatchedSdLGHybrid:
+ 
+             if T > 1:
+                 def compute_step_count(carry_sc, term):
+-                    next_step = (carry_sc + 1.0) * (1.0 - term)
++                    next_step = carry_sc * (1.0 - term) + 1.0
+                     return next_step, next_step
+ 
+                 _, step_counts = jax.lax.scan(compute_step_count, carry.step_count, terminations)
+                 new_step_count = step_counts[-1]
+             else:
+-                new_step_count = (carry.step_count + 1.0) * (1.0 - terminations[0])
++                new_step_count = carry.step_count * (1.0 - terminations[0]) + 1.0
+ 
+             new_carry = SdLGHybridCarry(
+                 tilde_k=carry.tilde_k,
+@@ -411,13 +411,13 @@ class BatchedSdLGHybrid:
+ 
+         if inputs.shape[0] > 1:
+             def increment_step(carry_step, termination):
+-                next_step = (carry_step + 1.0) * (1.0 - termination)
++                next_step = carry_step * (1.0 - termination) + 1.0
+                 return next_step, next_step
+ 
+             _, step_counts = jax.lax.scan(increment_step, carry.step_count, terminations)
+             new_step_count = step_counts[-1]
+         else:
+-            new_step_count = (carry.step_count + 1.0) * (1.0 - terminations[0])
++            new_step_count = carry.step_count * (1.0 - terminations[0]) + 1.0
+ 
+         norm_gla = nn.LayerNorm(name="ln_gla")(x_swa)
+         gla_out, intrinsic_bonus, (new_tilde_k, new_tilde_v, new_theta), _ = GatedAttentionGLALayer(

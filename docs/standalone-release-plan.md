@@ -29,7 +29,7 @@ and study-specific aggregation described in the paper.
 
 **Deliverables**
 
-- `docs/TEMP_experiment_value_ledger.md` becomes the authoritative mapping of
+- `docs/experiment_value_ledger.md` is the authoritative mapping of
   paper claim, study, runner, input records, aggregation, and acceptance
   tolerance.
 - Record the current Git revision and package lockfile hash in every run

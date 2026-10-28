@@ -17,6 +17,11 @@ Craftax and POPGym jobs are intentionally heavyweight. Run manifests record
 the source revision, configuration, seed, package versions, and optional W&B
 run identifier; checkpoints and raw W&B files are not committed.
 
+The release deliberately has no Docker image: the supported full-run target is
+the documented ROCm host, and a generic CUDA container would be misleading.
+Install with the locked `uv` command in
+[`docs/reproduction.md`](docs/reproduction.md).
+
 ## Repository status
 
 Every frozen-paper study has a public launch command, a compact versioned

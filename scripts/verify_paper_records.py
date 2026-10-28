@@ -50,6 +50,25 @@ def verify_tmaze() -> None:
     )
 
 
+def verify_execution_semantics() -> None:
+    config = json.loads((ROOT / "configs" / "studies" / "execution_semantics_ablation.json").read_text())
+    endpoints = read_csv("execution_semantics_ablation/tmaze_seed_endpoints.csv")
+    if len(endpoints) != 60:
+        raise AssertionError("Execution-semantics T-Maze record must contain 60 seed endpoints")
+    expected_models = set(config["tmaze"]["factorial_models"] + config["tmaze"]["matched_models"])
+    if {row["model"] for row in endpoints} != expected_models:
+        raise AssertionError("Execution-semantics T-Maze models differ from configuration")
+    if any(sum(row["model"] == model for row in endpoints) != 10 for model in expected_models):
+        raise AssertionError("Execution-semantics T-Maze models must each contain ten seeds")
+    matched = read_csv("execution_semantics_ablation/matched_contrasts.csv")
+    h200 = next(row for row in matched if row["horizon"] == "200")
+    require_close("Execution-semantics matched H=200 Exact-minus-Approximate", float(h200["estimate"]), 0.102)
+    doorkey = read_csv("execution_semantics_ablation/doorkey_exact_seed_endpoints.csv")
+    if len(doorkey) != 5 or any(row["stop_reason"] != "step_cap" for row in doorkey):
+        raise AssertionError("Execution-semantics DoorKey record must contain five cap-terminated Exact runs")
+    require_close("Execution-semantics DoorKey Exact return", mean(doorkey, "eval_mean_return"), 0.251)
+
+
 def verify_tmaze_external_landscape() -> None:
     rows = read_csv("tmaze_external_landscape.csv")
     config_path = ROOT / "configs" / "studies" / "tmaze_external_landscape.json"
@@ -178,6 +197,7 @@ def verify_diagnostics() -> None:
 
 def main() -> None:
     verify_tmaze()
+    verify_execution_semantics()
     verify_tmaze_external_landscape()
     verify_minigrid()
     verify_doorkey()

@@ -1,0 +1,16 @@
+study,horizon,contrast,estimate,bootstrap_ci_low,bootstrap_ci_high,bootstrap_draws,design
+factorial,100,execution_exact_minus_approx,0.24921874999999993,0.12226562500000004,0.3746093749999999,200000,independent_cells
+factorial,100,phase_norope_minus_rope,-0.0031249999999999334,-0.12851562500000013,0.123046875,200000,independent_cells
+factorial,100,interaction_phase_difference_exact_minus_approx,0.10468749999999993,-0.14765625000000004,0.35546875,200000,independent_cells
+factorial,100,phase_effect_within_exact,0.04921874999999998,-0.1015625,0.20156249999999998,200000,independent_cells
+factorial,100,phase_effect_within_approx,-0.055468749999999956,-0.25546875,0.14609375000000002,200000,independent_cells
+factorial,150,execution_exact_minus_approx,0.22226562500000002,0.09531249999999991,0.34843750000000007,200000,independent_cells
+factorial,150,phase_norope_minus_rope,0.07304687499999996,-0.0546875,0.19921875,200000,independent_cells
+factorial,150,interaction_phase_difference_exact_minus_approx,0.24765625000000002,-0.006250000000000033,0.5,200000,independent_cells
+factorial,150,phase_effect_within_exact,0.19687500000000002,-0.006249999999999978,0.396875,200000,independent_cells
+factorial,150,phase_effect_within_approx,-0.05078125,-0.20625,0.1015625,200000,independent_cells
+factorial,200,execution_exact_minus_approx,0.14921874999999996,0.04531249999999998,0.27226562499999996,200000,independent_cells
+factorial,200,phase_norope_minus_rope,-0.006249999999999978,-0.13007812499999993,0.09765625,200000,independent_cells
+factorial,200,interaction_phase_difference_exact_minus_approx,0.09843750000000001,-0.11093750000000002,0.34296875000000004,200000,independent_cells
+factorial,200,phase_effect_within_exact,0.04296875,-0.15859374999999998,0.24609375,200000,independent_cells
+factorial,200,phase_effect_within_approx,-0.05546875000000001,-0.15703125,-0.0015624999999999667,200000,independent_cells

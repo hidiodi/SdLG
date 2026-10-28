@@ -1,0 +1,34 @@
+{
+  "study_id": "H2-EXECUTION-SEMANTICS-ABLATION",
+  "intervention": {
+    "one_step_local_buffer": "chronological_right_aligned",
+    "counter_update": "s_next = s * (1 - done) + 1",
+    "scope": "joint intervention; do not interpret as separate causal effects"
+  },
+  "tmaze": {
+    "train_horizon": 100,
+    "evaluation_horizons": [100, 150, 200],
+    "factorial_models": ["Exact_NoRoPE", "Exact_RoPE", "Approx_NoRoPE", "Approx_RoPE"],
+    "matched_models": ["Matched_Exact_NoRoPE", "Matched_Approx_NoRoPE"],
+    "seeds": [42, 54, 99, 123, 456, 789, 111, 222, 333, 444],
+    "bootstrap_draws": 200000,
+    "bootstrap_seed": 20260919
+  },
+  "doorkey": {
+    "environment": "MiniGrid-DoorKey-8x8",
+    "model": "SdLG-Exact",
+    "seeds": [42, 54, 99, 123, 456],
+    "total_environment_steps": 20000000,
+    "early_stop_threshold": 0.96,
+    "early_stop_patience": 3
+  },
+  "records": [
+    "data/paper-records/execution_semantics_ablation/tmaze_seed_endpoints.csv",
+    "data/paper-records/execution_semantics_ablation/doorkey_exact_seed_endpoints.csv",
+    "data/paper-records/execution_semantics_ablation/factorial_summary.csv",
+    "data/paper-records/execution_semantics_ablation/factorial_contrasts.csv",
+    "data/paper-records/execution_semantics_ablation/matched_summary.csv",
+    "data/paper-records/execution_semantics_ablation/matched_contrasts.csv"
+  ],
+  "implementation_patch": "patches/execution_semantics_ablation.patch"
+}

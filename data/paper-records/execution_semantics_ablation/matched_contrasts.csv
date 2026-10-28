@@ -1,0 +1,4 @@
+study,horizon,contrast,estimate,bootstrap_ci_low,bootstrap_ci_high,bootstrap_draws,design
+matched,100,matched_execution_exact_minus_approx,0.14921874999999996,-0.05234375000000002,0.35078125000000004,200000,independent_cells
+matched,150,matched_execution_exact_minus_approx,0.20000000000000007,-0.0015624999999999112,0.3984375,200000,independent_cells
+matched,200,matched_execution_exact_minus_approx,0.1015625,-0.10000000000000009,0.303125,200000,independent_cells
