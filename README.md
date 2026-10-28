@@ -63,8 +63,6 @@ uv run python scripts/reproduce.py figures --output-dir paper/plots/rebuilt
 (cd paper && latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex)
 ```
 
-The verified archival revision is Git tag `submission-2026-10-28`.
-
 ## License
 
 MIT. See [LICENSE](LICENSE).
