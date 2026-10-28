@@ -1,14 +1,30 @@
-# SdLG
+# SdLG supplementary material
 
-This is the reproducible-code release for the SdLG study of local attention,
-associative recurrent memory, and controlled PPO experiments in partially
-observable reinforcement learning.
+This is the standalone reproducibility release for *Operational Boundaries of
+a Modular Recurrent-Memory Architecture in Partially Observable Reinforcement
+Learning*. It contains the SdLG implementation, versioned compact experiment
+records, public launch commands, the frozen manuscript source, and the
+compiled paper.
 
-The complete release contract is in
-[`docs/experiment-manifest.md`](docs/experiment-manifest.md): it includes
-every project experiment reported in the paper, from synthetic diagnostics to
-full Craftax and POPGym benchmarks. Start with the standalone
-[`docs/reproduction.md`](docs/reproduction.md) guide.
+## Quick start
+
+From the repository root, install the locked environment and validate the
+frozen paper results:
+
+```bash
+uv sync --extra analysis --extra dev
+uv run python scripts/reproduce.py audit
+(cd paper && latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex)
+```
+
+The audit is analysis-only: it verifies the frozen headline values and
+rebuilds the released table and figure artifacts under `results/audit/`. It
+does not launch long PPO training jobs.
+
+For every paper study, configuration, seeds, expected outputs, and the full
+launch command, see [`docs/experiment-manifest.md`](docs/experiment-manifest.md).
+[`docs/reproduction.md`](docs/reproduction.md) gives the complete guided
+workflow.
 
 ## Hardware target
 
@@ -22,17 +38,17 @@ the documented ROCm host, and a generic CUDA container would be misleading.
 Install with the locked `uv` command in
 [`docs/reproduction.md`](docs/reproduction.md).
 
-## Repository status
+## What this release reproduces
 
-Every main-result study has a public full-run command, a compact versioned
-record, and an auditable output contract. Appendix H.2 is released as verified
-compact records plus the versioned implementation patch for its sensitivity
-condition; it deliberately does not replace the main-result runner. `uv run
-python scripts/reproduce.py audit` verifies reported values and rebuilds the
-released tables and empirical figures. Long PPO runs are intentionally not
-executed by the audit. See
-[`docs/MISSING_RELEASE_ITEMS.md`](docs/MISSING_RELEASE_ITEMS.md) for the
-remaining hardening work and limits on fresh-run validation.
+Every main-result study has a public full-run command, compact versioned
+records, and an auditable output contract. The release audit verifies all
+reported headline values and regenerates tables and empirical figures from the
+tracked records. Fresh runs are stochastic; compare their documented endpoint
+aggregates rather than expecting bitwise-identical results.
+
+Appendix H.2 is a sensitivity condition released as verified seed-level
+records and a versioned implementation patch. It is intentionally separate
+from the main-result training runner.
 
 ## Frozen manuscript
 
@@ -46,6 +62,8 @@ uv run python scripts/reproduce.py tables --output-dir paper/artifacts
 uv run python scripts/reproduce.py figures --output-dir paper/plots/rebuilt
 (cd paper && latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex)
 ```
+
+The verified archival revision is Git tag `submission-2026-10-28`.
 
 ## License
 
