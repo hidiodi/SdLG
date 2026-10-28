@@ -1,0 +1,5 @@
+env_name: "TMaze"
+num_envs: 64
+num_steps: 100
+max_episode_steps: 1000
+optimistic_resets: false

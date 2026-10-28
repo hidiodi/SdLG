@@ -1,0 +1,4 @@
+study,horizon,contrast,estimate,bootstrap_ci_low,bootstrap_ci_high,bootstrap_draws,design
+gate-bias,100,gate_bias_plus2_minus_zero,-0.04921875000000009,-0.25078125000000007,0.1539062499999999,200000,independent_cells
+gate-bias,150,gate_bias_plus2_minus_zero,-0.05078125,-0.25234375,0.15078124999999998,200000,independent_cells
+gate-bias,200,gate_bias_plus2_minus_zero,-0.09999999999999998,-0.30000000000000004,0.1015625,200000,independent_cells

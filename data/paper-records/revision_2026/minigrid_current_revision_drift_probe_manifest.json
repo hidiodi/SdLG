@@ -1,0 +1,47 @@
+{
+  "study_id": "MINIGRID-LOCALITY-EXPANSION-2026",
+  "git_commit": "1e1dc90368e4a0ebf4a05c40cfef12af95779f2a",
+  "git_worktree_dirty": true,
+  "runner_sha256": "c98e05bc2b7841a241c26c6abca31942d78db46dd3c8e227e511839b7696491c",
+  "argv": [
+    "scripts/diagnostics/architecture/swa_ablation/swa_ablation.py",
+    "--seeds",
+    "42,54,99,123,456,111,222,333,444,789,1001,1002,1003,1004,1005",
+    "--conditions",
+    "SdLG-SWA,SdLG-None",
+    "--fixed-endpoint",
+    "--overwrite",
+    "--output",
+    "papers/writing/generated_artifacts/revision_2026/minigrid_locality_raw.csv",
+    "--manifest",
+    "papers/writing/generated_artifacts/revision_2026/minigrid_locality_run_manifest.json"
+  ],
+  "runner": "scripts/diagnostics/architecture/swa_ablation/swa_ablation.py",
+  "output_csv": "papers/writing/generated_artifacts/revision_2026/minigrid_locality_raw.csv",
+  "seeds": [
+    42,
+    54,
+    99,
+    123,
+    456,
+    111,
+    222,
+    333,
+    444,
+    789,
+    1001,
+    1002,
+    1003,
+    1004,
+    1005
+  ],
+  "conditions": [
+    "SdLG-SWA",
+    "SdLG-None"
+  ],
+  "fixed_endpoint": true,
+  "total_timesteps": 10000000,
+  "num_envs": 256,
+  "num_steps": 64,
+  "endpoint_semantics": "fixed"
+}

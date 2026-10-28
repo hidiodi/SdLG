@@ -1,0 +1,2 @@
+estimand,estimate,bootstrap_ci_low,bootstrap_ci_high,permutation_p_two_sided,bootstrap_draws,permutation_draws,design
+mean_endpoint_return_swa_enabled_minus_bypassed,-0.27396356359434626,-0.5490388138782388,0.007771658203564329,0.06976465117674412,200000,200000,independent_seed_level_runs

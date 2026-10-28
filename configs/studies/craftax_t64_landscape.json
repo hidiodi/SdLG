@@ -1,0 +1,27 @@
+{
+  "study_id": "T3-CRAFTAX-EXTERNAL-LANDSCAPE",
+  "environment": "Craftax-Classic-Symbolic-v1",
+  "training": {
+    "total_environment_steps": 50000000,
+    "rollout_tbptt_length": 64,
+    "runs_per_family": 5,
+    "seeds": [42, 43, 44, 45, 46],
+    "metric": "final logged training return",
+    "aggregation": "mean and sample SD across five runs"
+  },
+  "families": [
+    "PPO-GRU",
+    "PPO-Mamba",
+    "AGaLiTe",
+    "PPO-GLA",
+    "PPO-GTrXL",
+    "SdLG-Approx",
+    "SdLG-Exact"
+  ],
+  "sources": [
+    "data/paper-records/original_paper_upgrade/craftax_t64_seven_family_performance.csv",
+    "data/paper-records/original_paper_upgrade/craftax_t64_seven_family_throughput.csv"
+  ],
+  "status": "launch-adapter-validation-required",
+  "note": "The existing Craftax watchdog script is a T=16 sweep and must not be used as a substitute. The five seed values were recovered from the surviving runner; confirm them against archived run metadata before claiming an exact historical rerun."
+}

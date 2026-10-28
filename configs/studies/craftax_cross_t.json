@@ -1,0 +1,31 @@
+{
+  "study_id": "T3-CRAFTAX-CROSS-T",
+  "environment": "Craftax-Classic-Symbolic-v1",
+  "training": {
+    "total_environment_steps": 50000000,
+    "runs_per_cell": 5,
+    "seeds": [42, 43, 44, 45, 46],
+    "metric": "final logged training return",
+    "aggregation": "mean and sample SD across five runs"
+  },
+  "reported_cells": [
+    ["PPO-GRU", 16],
+    ["SdLG-Approx", 16],
+    ["PPO-Mamba", 16],
+    ["PPO-GLA", 16],
+    ["AGaLiTe", 16],
+    ["AGaLiTe", 32],
+    ["PPO-GRU", 64],
+    ["SdLG-Approx", 64],
+    ["PPO-Mamba", 64],
+    ["PPO-GLA", 64],
+    ["AGaLiTe", 64],
+    ["PPO-GTrXL", 64],
+    ["SdLG-Exact", 64],
+    ["PPO-GRU", 128],
+    ["PPO-GTrXL", 128]
+  ],
+  "source": "data/paper-records/craftax_cross_t_verified.csv",
+  "status": "launch-adapter-validation-required",
+  "note": "Only the listed cells are reported; do not silently fill an unreported full family-by-T grid. The five seed values were recovered from the surviving runner; confirm them against archived run metadata before claiming an exact historical rerun."
+}

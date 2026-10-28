@@ -1,0 +1,8 @@
+{
+  "state": "paused_user_requested",
+  "group": "ggs_alpha_sweep",
+  "detail": "Stopped after the requested next completed endpoint; resume only on user instruction.",
+  "completed_ggs_endpoints": 1,
+  "target_completed_ggs_endpoints": 1,
+  "updated_at_utc": "2026-09-20T23:05:49.155438+00:00"
+}

@@ -1,0 +1,26 @@
+{
+  "threshold": 0.5,
+  "comparisons": [
+    {
+      "alpha": 0.1,
+      "seed": 42,
+      "historical_endpoint": 10.48291015625,
+      "rerun_endpoint": 10.561229705810549,
+      "historical_label": "SdLGHybrid-GGS-0.1",
+      "rerun_label": "SdLGHybrid-GGS-0.1",
+      "absolute_difference": 0.07831954956054865,
+      "pass": true
+    },
+    {
+      "alpha": 1.0,
+      "seed": 42,
+      "historical_endpoint": 9.903223037719728,
+      "rerun_endpoint": 9.759180068969728,
+      "historical_label": "SdLGHybrid-GGS-1.0",
+      "rerun_label": "SdLGHybrid-GGS-1",
+      "absolute_difference": 0.14404296875,
+      "pass": true
+    }
+  ],
+  "pass": true
+}

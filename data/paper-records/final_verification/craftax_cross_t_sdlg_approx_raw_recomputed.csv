@@ -1,0 +1,11 @@
+family,historical_runner,T,seed,metric,endpoint_step,value,artifact
+SdLG-Approx,SdLGHybrid,16,42,Train/Mean_Return,49971200,16.049930572509766,wandb/run-20260718_123934-craftax50m_sdlghybrid_t16_seed_42_run-4/files/wandb-summary.json
+SdLG-Approx,SdLGHybrid,16,43,Train/Mean_Return,49971200,16.256235122680664,wandb/run-20260718_133836-craftax50m_sdlghybrid_t16_seed_43_run-4/files/wandb-summary.json
+SdLG-Approx,SdLGHybrid,16,44,Train/Mean_Return,49971200,16.219472885131836,wandb/run-20260718_143808-craftax50m_sdlghybrid_t16_seed_44_run-4/files/wandb-summary.json
+SdLG-Approx,SdLGHybrid,16,45,Train/Mean_Return,49971200,16.165847778320312,wandb/run-20260718_153658-craftax50m_sdlghybrid_t16_seed_45_run-4/files/wandb-summary.json
+SdLG-Approx,SdLGHybrid,16,46,Train/Mean_Return,49971200,16.979225158691406,wandb/run-20260718_163546-craftax50m_sdlghybrid_t16_seed_46_run-4/files/wandb-summary.json
+SdLG-Approx,SdLGHybrid,64,42,Train/Mean_Return,49971200,14.200343132019043,scripts/diagnostics/benchmarks/craftax_full/wandb/run-20260716_133045-craftax50m_sdlghybrid_t64_seed_42/files/wandb-summary.json
+SdLG-Approx,SdLGHybrid,64,43,Train/Mean_Return,49971200,15.133333206176758,scripts/diagnostics/benchmarks/craftax_full/wandb/run-20260716_151155-craftax50m_sdlghybrid_t64_seed_43/files/wandb-summary.json
+SdLG-Approx,SdLGHybrid,64,44,Train/Mean_Return,49971200,14.747442245483398,scripts/diagnostics/benchmarks/craftax_full/wandb/run-20260716_161209-craftax50m_sdlghybrid_t64_seed_44/files/wandb-summary.json
+SdLG-Approx,SdLGHybrid,64,45,Train/Mean_Return,49971200,15.006080627441406,scripts/diagnostics/benchmarks/craftax_full/wandb/run-20260717_165641-craftax50m_sdlghybrid_t64_seed_45/files/wandb-summary.json
+SdLG-Approx,SdLGHybrid,64,46,Train/Mean_Return,49971200,14.877212524414062,scripts/diagnostics/benchmarks/craftax_full/wandb/run-20260718_105450-craftax50m_sdlghybrid_t64_seed_46/files/wandb-summary.json

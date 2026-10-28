@@ -1,0 +1,49 @@
+{
+  "study_id": "COUNTRECALL-CONFIRMATION-2026",
+  "git_commit": "1e1dc90368e4a0ebf4a05c40cfef12af95779f2a",
+  "runner_sha256": "1902fc4069e6f6345872a1b51311fcebba7597a17e42333db855d611f66b1e7a",
+  "source_sha256": {
+    "scripts/diagnostics/revision_2026_countrecall_confirmation.py": "1902fc4069e6f6345872a1b51311fcebba7597a17e42333db855d611f66b1e7a",
+    "src/trainers/purejax_trainer.py": "bff28c29cbc4a32148d8b31ec563bb0c2ea0350611d482045e8e12bc91bd301c",
+    "src/envs/popgym_wrapper.py": "4d0d21acd6fbdbecd2cf916a7e7e4e3fe72c163e6f3e10c8029ba50059e8cc62",
+    "src/models/purejaxrl/wrappers.py": "72c1a2ed3625c99ce709692a4ed435680e9fac1e14ddaf020a92069684af40b7",
+    "src/models/common/exact_sdlg.py": "1d72df6835d1223dd55c03ef1b1275e389e8eaedc8e1e368653fcf8fbceb6773",
+    "src/models/common/sdlg_hybrid.py": "b77a7aa26f3295c98d237ed5de9bc0dad835377cc656de010927367f300100be",
+    "src/models/common/gru.py": "7f8c6a7d0c0ac9e22efd09a0bdd56e614fac05b65b289384f5167f15ad3715ad",
+    "src/models/common/adam_gla.py": "02cb651bb696f1f2c7c0dd8ca24a0cecf782e3e616b10ad1acdf648252b9a9dc"
+  },
+  "environment": "CountRecallEasy",
+  "models": [
+    "PPO-GLA"
+  ],
+  "seeds": [
+    42
+  ],
+  "nominal_steps": 163840,
+  "fixed_endpoint": "floor(nominal_steps / (NUM_ENVS*NUM_STEPS*LOG_INTERVAL_UPDATES)) completed log updates; no early stop or checkpoint resume",
+  "training": {
+    "num_envs": 256,
+    "num_steps": 64,
+    "log_interval_updates": 10,
+    "ppo_epochs": 4,
+    "minibatches": 8,
+    "learning_rate": 0.0003,
+    "anneal_lr": false,
+    "gamma": 0.99,
+    "gae_lambda": 0.95
+  },
+  "evaluation": {
+    "episodes": 64,
+    "length": "full environment maximum episode length, bounded by H=200 through the existing evaluator",
+    "policy": "categorical mode",
+    "seed_rule": "jax.PRNGKey(seed + final_log_index * 100)"
+  },
+  "hardware": {
+    "platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.39",
+    "jax_backend": "gpu",
+    "jax_devices": [
+      "rocm:0"
+    ]
+  },
+  "output": "papers/writing/generated_artifacts/revision_2026/countrecall_confirmation/dry_run_raw.csv"
+}

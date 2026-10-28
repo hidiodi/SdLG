@@ -1,0 +1,46 @@
+{
+  "study_id": "CTV-A1-ASSOCIATIVE-OVERWRITE",
+  "runner": "scripts/diagnostics/exact_sdlg/factorial_addressing_forgetting_suite.py",
+  "runner_sha256": "49dc78a402bb56f0fb0e8faa852e5c73b5f4317269f447ad843aecc0d604decb",
+  "git_commit": "1d8eba06c197587a1fdc7cd4567f084982dced5d",
+  "jax_version": "0.6.0",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+  "backend": "gpu",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "loads_N": [
+    32,
+    64,
+    128
+  ],
+  "key_dimensions": [
+    16,
+    32,
+    64,
+    128
+  ],
+  "value_dimensions": [
+    8,
+    16,
+    32,
+    64
+  ],
+  "formulations": {
+    "additive": "M <- M + k v^T",
+    "normalized_delta": "M <- M + eta/(||k||^2+eps) k (v-M^T k)^T",
+    "gated_additive_proxy": "M <- 0.995 M + k v^T; fixed proxy, not learned SdLG gates"
+  },
+  "overwrite_protocol": "write N associations, then overwrite first floor(N/4) keys with replacement values",
+  "shared_draws": true,
+  "statistical_unit": "synthetic random draw"
+}

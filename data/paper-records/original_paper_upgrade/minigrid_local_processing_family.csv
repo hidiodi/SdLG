@@ -1,0 +1,17 @@
+task,window,seed,endpoint_return,source
+MemoryS16,W=16,123,0.9877941608428956,wandb_exports/MiniGrid_SWA_Ablation/SdLG-SWA-MiniGrid-MemoryS16-Seed-123.csv
+MemoryS16,W=0,54,0.8563920259475708,wandb_exports/MiniGrid_SWA_Ablation/SdLG-None-MiniGrid-MemoryS16-Seed-54.csv
+MemoryS16,W=0,99,0.132243275642395,wandb_exports/MiniGrid_SWA_Ablation/SdLG-None-MiniGrid-MemoryS16-Seed-99.csv
+MemoryS16,W=0,456,0.9938888549804688,wandb_exports/MiniGrid_SWA_Ablation/SdLG-None-MiniGrid-MemoryS16-Seed-456.csv
+MemoryS8,W=0,54,0.9867064952850342,wandb_exports/MiniGrid_SWA_Ablation/SdLG-None-MiniGrid-MemoryS8-Seed-54.csv
+MemoryS16,W=0,42,0.9940577745437622,wandb_exports/MiniGrid_SWA_Ablation/SdLG-None-MiniGrid-MemoryS16-Seed-42.csv
+MemoryS8,W=16,42,0.0196435563266277,wandb_exports/MiniGrid_SWA_Ablation/SdLG-SWA-MiniGrid-MemoryS8-Seed-42.csv
+MemoryS8,W=16,99,0.5232330560684204,wandb_exports/MiniGrid_SWA_Ablation/SdLG-SWA-MiniGrid-MemoryS8-Seed-99.csv
+MemoryS16,W=16,456,0.9936705231666564,wandb_exports/MiniGrid_SWA_Ablation/SdLG-SWA-MiniGrid-MemoryS16-Seed-456.csv
+MemoryS16,W=0,123,0.3921056389808655,wandb_exports/MiniGrid_SWA_Ablation/SdLG-None-MiniGrid-MemoryS16-Seed-123.csv
+MemoryS16,W=16,99,0.9918018579483032,wandb_exports/MiniGrid_SWA_Ablation/SdLG-SWA-MiniGrid-MemoryS16-Seed-99.csv
+MemoryS16,W=16,42,0.9939568042755128,wandb_exports/MiniGrid_SWA_Ablation/SdLG-SWA-MiniGrid-MemoryS16-Seed-42.csv
+MemoryS8,W=16,54,0.3397525250911712,wandb_exports/MiniGrid_SWA_Ablation/SdLG-SWA-MiniGrid-MemoryS8-Seed-54.csv
+MemoryS16,W=16,54,0.7999285459518433,wandb_exports/MiniGrid_SWA_Ablation/SdLG-SWA-MiniGrid-MemoryS16-Seed-54.csv
+MemoryS8,W=0,99,0.9867834448814392,wandb_exports/MiniGrid_SWA_Ablation/SdLG-None-MiniGrid-MemoryS8-Seed-99.csv
+MemoryS8,W=0,42,0.9867669343948364,wandb_exports/MiniGrid_SWA_Ablation/SdLG-None-MiniGrid-MemoryS8-Seed-42.csv

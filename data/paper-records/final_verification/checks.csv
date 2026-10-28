@@ -1,0 +1,76 @@
+check_id,status,detail,source
+tmaze-Exact_NoRoPE-H100,PASS,n=10; raw mean=0.900000000; displayed derivative=0.900000000,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-Exact_RoPE-H100,PASS,n=10; raw mean=0.800000000; displayed derivative=0.800000000,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-Approx_NoRoPE-H100,PASS,n=10; raw mean=0.498437500; displayed derivative=0.498437500,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-Approx_RoPE-H100,PASS,n=10; raw mean=0.650781250; displayed derivative=0.650781250,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-Exact_NoRoPE-H150,PASS,n=10; raw mean=0.900000000; displayed derivative=0.900000000,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-Exact_RoPE-H150,PASS,n=10; raw mean=0.601562500; displayed derivative=0.601562500,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-Approx_NoRoPE-H150,PASS,n=10; raw mean=0.547656250; displayed derivative=0.547656250,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-Approx_RoPE-H150,PASS,n=10; raw mean=0.503125000; displayed derivative=0.503125000,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-Exact_NoRoPE-H200,PASS,n=10; raw mean=0.850781250; displayed derivative=0.850781250,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-Exact_RoPE-H200,PASS,n=10; raw mean=0.650781250; displayed derivative=0.650781250,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-Approx_NoRoPE-H200,PASS,n=10; raw mean=0.498437500; displayed derivative=0.498437500,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-Approx_RoPE-H200,PASS,n=10; raw mean=0.501562500; displayed derivative=0.501562500,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-factorial-contrasts,PASS,found 9 prespecified horizon-by-contrast rows,papers/writing/generated_artifacts/revision_2026/tmaze_factorial_contrasts.csv
+tmaze-matched-Matched_Exact_NoRoPE-H100,PASS,n=10; raw mean=0.900000000; displayed derivative=0.900000000,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-matched-Matched_Approx_NoRoPE-H100,PASS,n=10; raw mean=0.398437500; displayed derivative=0.398437500,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-matched-Matched_Exact_NoRoPE-H150,PASS,n=10; raw mean=0.900000000; displayed derivative=0.900000000,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-matched-Matched_Approx_NoRoPE-H150,PASS,n=10; raw mean=0.501562500; displayed derivative=0.501562500,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-matched-Matched_Exact_NoRoPE-H200,PASS,n=10; raw mean=0.850781250; displayed derivative=0.850781250,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-matched-Matched_Approx_NoRoPE-H200,PASS,n=10; raw mean=0.500000000; displayed derivative=0.500000000,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+tmaze-matched-execution-contrasts,PASS,three prespecified independent-condition contrasts; H=200 is primary,papers/writing/generated_artifacts/revision_2026/tmaze_factorial_contrasts.csv
+tmaze-matched-Matched_Exact_NoRoPE-terminal-records,PASS,n=10; mean terminal step=9076736; censored=1; terminal return >=.98=9,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_training.csv
+tmaze-matched-Matched_Approx_NoRoPE-terminal-records,PASS,n=10; mean terminal step=26181632; censored=3; terminal return >=.98=7,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_training.csv
+exact-scan-semantics,PASS,PASS full-memory: max abs error 2.384e-07; PASS full-normalizer: max abs error 2.384e-07; PASS full-carry-memory: max abs error 2.384e-07; PASS full-carry-normalizer: max abs error 2.384e-07; PASS chunked-memory: max abs error 2.384e-07; PASS chunked-normalizer: max abs error 2.384e-07; PASS chunked-carry-memory: max abs error 2.384e-07; PASS chunked-carry-normalizer: max abs error 2.384e-07; PASS factorized-full: max abs error 2.384e-07; PASS factorized-chunked: max abs error 2.384e-07; PASS factorized-final: max abs error 1.192e-07; PASS reset-before-current-write: max abs error 0.000e+00; PASS tbptt-detach-input: max abs error 0.000e+00; PASS tbptt-detach-parameters: nonzero gradient; PASS normalized-delta-eigenvalues: max abs error 3.576e-07,scripts/diagnostics/verify_exact_scan_semantics.py
+minigrid-SdLG-SWA,PASS,n=15; mean=0.508422224; sd=0.445327690,papers/writing/generated_artifacts/revision_2026/minigrid_locality_seed_endpoints.csv
+minigrid-SdLG-None,PASS,n=15; mean=0.782385787; sd=0.354499991,papers/writing/generated_artifacts/revision_2026/minigrid_locality_seed_endpoints.csv
+minigrid-difference,PASS,"W16-W0=-0.273963564; CI=[-0.549038814, 0.007771658]",papers/writing/generated_artifacts/revision_2026/minigrid_locality_difference.csv
+minigrid-historical-reproduction-record,PASS,seed=42; historical=0.993957; rerun=0.993684; absolute difference=0.000273; source=837047742229,papers/writing/generated_artifacts/revision_2026/minigrid_historical_reproduction_gate.csv
+ggs-accepted-endpoints,PASS,five matched pairs; alpha=.1 mean=11.209706; alpha=1 mean=9.757129; paired difference=1.452577,scripts/diagnostics/architecture/gradient_shielding/gradient_shielding.csv
+associative-retrieval-factorial,PASS,rows=480; strict d_k monotonicity in 30/30 seed-load slices; d_v spans=0.002-0.010,papers/latex/cleanRewrite/artifacts/associative_capacity_480_cells.csv
+associative-retrieval-appendix-table,PASS,all 16 cells match canonical mean/sample-SD,papers/latex/cleanRewrite/artifacts/associative_capacity_480_cells.csv
+popgym-benchmark-coverage,PASS,16 Easy + 7 Medium tasks; selected examples contain 10 task-model summaries,papers/writing/generated_artifacts/original_paper_upgrade/popgym_complete_mmer_per_seed.csv
+craftax-cross-t-historical-summary,PASS,15 historical five-run cells; SdLG-Approx=16.330 at T=16 and 14.790 at T=64; historical runner=SdLGHybrid,papers/writing/generated_artifacts/craftax_cross_t_verified.csv
+craftax-cross-t-sdlg-approx-t16-raw-endpoints,PASS,"seeds=[42, 43, 44, 45, 46]; final Train/Mean_Return=16.334142±0.368934 from 5 runs",wandb
+craftax-cross-t-sdlg-approx-t64-raw-endpoints,PASS,"seeds=[42, 43, 44, 45, 46]; final Train/Mean_Return=14.792882±0.361123 from 5 runs",scripts/diagnostics/benchmarks/craftax_full/wandb
+manuscript-minigrid-values,PASS,"15-seed count, difference, and interval endpoints are present",papers/latex/cleanRewrite/sections/05_main_results.tex
+manuscript-tmaze-contrasts,PASS,execution effects and the factorial-contrast table reference are present,papers/latex/cleanRewrite/sections/05_main_results.tex
+manuscript-tmaze-matched-values,PASS,matched H=200 contrast and fixed-topology description are present,papers/latex/cleanRewrite/sections/05_main_results.tex
+manuscript-ggs-values,PASS,"accepted endpoint means, paired difference, and interval are present",papers/latex/cleanRewrite/sections/05_main_results.tex
+manuscript-retrieval-values,PASS,"factorial size, d_v span, and scope qualifier are present",papers/latex/cleanRewrite/sections/05_main_results.tex
+manuscript-popgym-values,PASS,coverage qualification and CountRecall/Concentration reversal values are present,papers/latex/cleanRewrite/sections/05_main_results.tex
+manuscript-craftax-cross-t-values,PASS,verified SdLG-Approx mapping and Cross-T values are present,papers/latex/cleanRewrite/sections/05_main_results.tex
+unsupported-compute-total-removed,PASS,No unsupported project-wide GPU-hour total,papers/latex/cleanRewrite/sections/appendix.tex
+craftax-provenance-reference,PASS,Craftax reproduction reference uses a stable section label,papers/latex/cleanRewrite/sections/appendix.tex
+craftax-training-metric-label,PASS,Cross-T figure prose and summary metadata identify training return,papers/writing/generated_artifacts/craftax_cross_t_verified.csv
+historical-matched-seed-overlap,PASS,"Nonidentical seed-labelled endpoints by horizon: {100: 4, 150: 4, 200: 6}; not proof of trajectory independence",papers/writing/generated_artifacts/component_transfer/tmaze_matched_overlap_audit.csv
+a1-frozen-source,PASS,Raw outcomes unchanged since paired analysis,papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-gated_additive_proxy-1.0-minus-additive-1.0-target_overwrite_fidelity,PASS,"paired fixed-grid difference=0.082553507; bootstrap=[0.081681498,0.083438300]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-gated_additive_proxy-1.0-minus-additive-1.0-non_target_preservation,PASS,"paired fixed-grid difference=-0.007661783; bootstrap=[-0.007902002,-0.007421118]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-gated_additive_proxy-1.0-minus-additive-1.0-retrieval_cosine_after_overwrite,PASS,"paired fixed-grid difference=0.014892040; bootstrap=[0.014649480,0.015137715]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-0.25-minus-additive-1.0-target_overwrite_fidelity,PASS,"paired fixed-grid difference=0.183255888; bootstrap=[0.181181631,0.185327176]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-0.25-minus-additive-1.0-non_target_preservation,PASS,"paired fixed-grid difference=0.007676490; bootstrap=[0.006908088,0.008440924]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-0.25-minus-additive-1.0-retrieval_cosine_after_overwrite,PASS,"paired fixed-grid difference=0.051571341; bootstrap=[0.050974875,0.052175741]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-0.5-minus-additive-1.0-target_overwrite_fidelity,PASS,"paired fixed-grid difference=0.287182213; bootstrap=[0.284147038,0.290215348]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-0.5-minus-additive-1.0-non_target_preservation,PASS,"paired fixed-grid difference=-0.034679630; bootstrap=[-0.036081363,-0.033272897]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-0.5-minus-additive-1.0-retrieval_cosine_after_overwrite,PASS,"paired fixed-grid difference=0.045785831; bootstrap=[0.044906663,0.046671199]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-1.0-minus-additive-1.0-target_overwrite_fidelity,PASS,"paired fixed-grid difference=0.307753484; bootstrap=[0.304036705,0.311460317]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-1.0-minus-additive-1.0-non_target_preservation,PASS,"paired fixed-grid difference=-0.152542406; bootstrap=[-0.154845420,-0.150239689]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-1.0-minus-additive-1.0-retrieval_cosine_after_overwrite,PASS,"paired fixed-grid difference=-0.037468433; bootstrap=[-0.038911561,-0.036028891]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-0.5-minus-normalized_delta-0.25-target_overwrite_fidelity,PASS,"paired fixed-grid difference=0.103926326; bootstrap=[0.102670612,0.105189120]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-0.5-minus-normalized_delta-0.25-non_target_preservation,PASS,"paired fixed-grid difference=-0.042356121; bootstrap=[-0.043164126,-0.041546935]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-0.5-minus-normalized_delta-0.25-retrieval_cosine_after_overwrite,PASS,"paired fixed-grid difference=-0.005785510; bootstrap=[-0.006282811,-0.005290663]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-1.0-minus-normalized_delta-0.25-target_overwrite_fidelity,PASS,"paired fixed-grid difference=0.124497596; bootstrap=[0.122223941,0.126774480]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-1.0-minus-normalized_delta-0.25-non_target_preservation,PASS,"paired fixed-grid difference=-0.160218897; bootstrap=[-0.162147668,-0.158289157]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-1.0-minus-normalized_delta-0.25-retrieval_cosine_after_overwrite,PASS,"paired fixed-grid difference=-0.089039773; bootstrap=[-0.090329247,-0.087751875]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-1.0-minus-normalized_delta-0.5-target_overwrite_fidelity,PASS,"paired fixed-grid difference=0.020571271; bootstrap=[0.019163141,0.021980303]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-1.0-minus-normalized_delta-0.5-non_target_preservation,PASS,"paired fixed-grid difference=-0.117862776; bootstrap=[-0.119224608,-0.116505621]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+a1-normalized_delta-1.0-minus-normalized_delta-0.5-retrieval_cosine_after_overwrite,PASS,"paired fixed-grid difference=-0.083254264; bootstrap=[-0.084259750,-0.082251593]",papers/writing/generated_artifacts/component_transfer/associative_overwrite_raw.csv
+matched-c1-endpoint-linkage,PASS,40 unique accepted endpoints linked to local W&B summaries; does not prove cross-study execution identity,papers/writing/generated_artifacts/component_transfer/scientific_rigor_audit.json
+c1-GateBias_Exact_bg2-H100,PASS,ten-seed mean=0.750781250,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+c1-GateBias_Exact_bg2-H150,PASS,ten-seed mean=0.750781250,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+c1-GateBias_Exact_bg2-H200,PASS,ten-seed mean=0.701562500,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+c1-GateBias_Exact_bg0-H100,PASS,ten-seed mean=0.800000000,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+c1-GateBias_Exact_bg0-H150,PASS,ten-seed mean=0.801562500,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+c1-GateBias_Exact_bg0-H200,PASS,ten-seed mean=0.801562500,scripts/diagnostics/exact_sdlg/unified_tmaze_ablations_zeroshot.csv
+b2-timing-count,PASS,"All four systems cells use 300 warmed timing calls, not independent trained seeds",papers/writing/generated_artifacts/component_transfer/matched_tmaze_inference.csv

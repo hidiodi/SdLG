@@ -1,0 +1,2 @@
+quantity,value,ci_low,ci_high,n_w16,n_w0,bootstrap_resamples,rng_seed
+mean_difference_W16_minus_W0,0.279693,-0.013084,0.609555,5,5,100000,20260911

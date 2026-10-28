@@ -1,0 +1,38 @@
+{
+  "study_id": "MINIGRID-LOCALITY-EXPANSION-2026",
+  "dataset_role": "revision-headline-dataset",
+  "status": "complete",
+  "design": "two independent 15-seed fixed-endpoint conditions",
+  "conditions": {
+    "SdLG-SWA": {
+      "local_window": 16,
+      "seeds": [42, 54, 99, 123, 456, 111, 222, 333, 444, 789, 1001, 1002, 1003, 1004, 1005],
+      "manifest": "minigrid_locality_run_manifest.json and minigrid_locality_resume_w16_manifest.json"
+    },
+    "SdLG-None": {
+      "local_window": 0,
+      "seeds": [42, 54, 99, 123, 456, 111, 222, 333, 444, 789, 1001, 1002, 1003, 1004, 1005],
+      "manifest": "minigrid_locality_w0_manifest.json"
+    }
+  },
+  "source_commit": "837047742229f4db0c3cfc54ceea293255fd7f0e",
+  "runner_sha256": "e18a31c316a04ba18e4bcd34ff04e209756e1444a1455e5dcbf2d1770cfa2fdc",
+  "environment_inventory": "minigrid_historical_snapshot_environment.json",
+  "endpoint_semantics": "fixed endpoint at 9,830,400 environment steps; unchanged 1,024-episode chunked evaluator and evaluation seed schedule",
+  "pairing_analysis": "independent conditions: matching integer seed labels do not establish identical parameter trees or realized trajectories after the local branch differs",
+  "raw_csv": {
+    "path": "minigrid_locality_raw.csv",
+    "sha256": "42828732a27bcddeec1c0b8f29b61d2f1ae391827af2234f9522cfe0566d5b45"
+  },
+  "derived_artifacts": {
+    "seed_endpoints": {"path": "minigrid_locality_seed_endpoints.csv", "sha256": "ce23b152e5cbfd32f4738ddabe9db36aab8b0e6066105c43e91052385504ff36"},
+    "summary": {"path": "minigrid_locality_summary.csv", "sha256": "452c6a3b64648a383416fb17c99e1a0defe69fdb9b0ea0d005bead28d784b7f9"},
+    "difference": {"path": "minigrid_locality_difference.csv", "sha256": "ed30a32aeb4e2c75ab15e3f39ccab07c7f73165aece7870eac5bc0b739eae537"}
+  },
+  "historical_context_only": [
+    "fig5_minigrid_swa.csv",
+    "minigrid_historical_revision_validation.csv",
+    "minigrid_historical_reproduction_gate.csv"
+  ],
+  "headline_dataset_excludes": "The accepted historical five-seed rows and the current-revision drift audit are not part of this dataset."
+}

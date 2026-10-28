@@ -1,0 +1,13 @@
+{
+  "measurement": "warmed one-step recurrent inference only",
+  "excludes": [
+    "compilation",
+    "environment stepping",
+    "training/backpropagation"
+  ],
+  "models": [
+    "matched Exact",
+    "matched rank-16 Approximate"
+  ],
+  "topology": "three local-associative-gated-FFN blocks; NoRoPE; alpha=1"
+}

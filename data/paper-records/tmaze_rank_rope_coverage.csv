@@ -1,0 +1,5 @@
+model,n_seeds,min_terminal_step,max_terminal_step
+Approx_NoRoPE,10,13434880,43909120
+Approx_RoPE,10,18186240,49971200
+Exact_NoRoPE,10,1146880,49971200
+Exact_RoPE,10,2949120,49971200

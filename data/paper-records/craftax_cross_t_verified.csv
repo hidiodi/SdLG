@@ -1,0 +1,16 @@
+Family,HistoricalRunner,T,MeanReturn,SampleSD,Seeds,TrainingSteps,Metric,Aggregation,ActorCriticTrunk,Source
+PPO-GRU,PPO-GRU,16,16.440,0.110,5,50000000,Final logged training return,mean and sample SD across five runs,standard shared trunk,ICML Table 1 / original_paper_experiment_ledger.csv
+SdLG-Approx,SdLGHybrid,16,16.330,0.370,5,50000000,Final logged training return,mean and sample SD across five runs,coupled (COUPLED_GGS=True),ICML Table 1 / original_paper_experiment_ledger.csv; project-author model mapping confirmation
+PPO-Mamba,PPO-Mamba,16,15.860,0.070,5,50000000,Final logged training return,mean and sample SD across five runs,standard shared trunk,ICML Table 1 / original_paper_experiment_ledger.csv
+PPO-GLA,PPO-GLA,16,14.110,0.590,5,50000000,Final logged training return,mean and sample SD across five runs,standard shared trunk,ICML Table 1 / original_paper_experiment_ledger.csv
+AGaLiTe,AGaLiTe,16,14.440,0.610,5,50000000,Final logged training return,mean and sample SD across five runs,standard shared trunk,ICML Table 1 / original_paper_experiment_ledger.csv
+AGaLiTe,AGaLiTe,32,14.990,0.260,5,50000000,Final logged training return,mean and sample SD across five runs,standard shared trunk,ICML Table 1 / original_paper_experiment_ledger.csv
+PPO-GRU,PPO-GRU,64,15.586,0.299,5,50000000,Final logged training return,mean and sample SD across five runs,standard shared trunk,ICML Table 1 / original_paper_experiment_ledger.csv
+SdLG-Approx,SdLGHybrid,64,14.790,0.360,5,50000000,Final logged training return,mean and sample SD across five runs,coupled (COUPLED_GGS=True),ICML Table 1 / original_paper_experiment_ledger.csv; project-author model mapping confirmation
+PPO-Mamba,PPO-Mamba,64,14.966,0.326,5,50000000,Final logged training return,mean and sample SD across five runs,standard shared trunk,ICML Table 1 / original_paper_experiment_ledger.csv
+PPO-GLA,PPO-GLA,64,15.687,0.217,5,50000000,Final logged training return,mean and sample SD across five runs,standard shared trunk,ICML Table 1 / original_paper_experiment_ledger.csv
+AGaLiTe,AGaLiTe,64,15.119,0.201,5,50000000,Final logged training return,mean and sample SD across five runs,standard shared trunk,ICML Table 1 / original_paper_experiment_ledger.csv
+PPO-GTrXL,PPO-GTrXL,64,15.398,0.223,5,50000000,Final logged training return,mean and sample SD across five runs,standard shared trunk,ICML Table 1 / original_paper_experiment_ledger.csv
+SdLG-Exact,SdLG-Exact,64,13.700,0.520,5,50000000,Final logged training return,mean and sample SD across five runs,exact-state wrapper,ICML Table 1 / original_paper_experiment_ledger.csv; project-author model mapping confirmation
+PPO-GRU,PPO-GRU,128,15.620,0.110,5,50000000,Final logged training return,mean and sample SD across five runs,standard shared trunk,ICML Table 1 / original_paper_experiment_ledger.csv
+PPO-GTrXL,PPO-GTrXL,128,13.830,0.680,5,50000000,Final logged training return,mean and sample SD across five runs,standard shared trunk,ICML Table 1 / original_paper_experiment_ledger.csv

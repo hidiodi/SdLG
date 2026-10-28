@@ -1,0 +1,47 @@
+{
+  "study_id": "CRAFTAX-ACTOR-GRADIENT-SWEEP-2026",
+  "git_commit": "f374a13431cd101b960b4b272f6bd7bd1a4f70e9",
+  "git_worktree_dirty": true,
+  "runner_sha256": "a6f31b69e6d2ee2d1e7ab71f79f905999f5fbcefee3047e01e9fb65431a86d73",
+  "argv": [
+    "scripts/diagnostics/architecture/gradient_shielding/gradient_shielding.py",
+    "--run",
+    "--alphas",
+    "0,0.1,0.25,0.5,1.0",
+    "--seeds",
+    "42,54,99,123,456",
+    "--overwrite",
+    "--output",
+    "/home/coins/PycharmProjects/JupyterProject/papers/writing/generated_artifacts/revision_2026/ggs_alpha_sweep_raw.csv",
+    "--manifest",
+    "/home/coins/PycharmProjects/JupyterProject/papers/writing/generated_artifacts/revision_2026/ggs_alpha_sweep_manifest.json"
+  ],
+  "runner": "scripts/diagnostics/architecture/gradient_shielding/gradient_shielding.py",
+  "output_csv": "../../home/coins/PycharmProjects/JupyterProject/papers/writing/generated_artifacts/revision_2026/ggs_alpha_sweep_raw.csv",
+  "alphas": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    1.0
+  ],
+  "seeds": [
+    42,
+    54,
+    99,
+    123,
+    456
+  ],
+  "total_timesteps": 20000000,
+  "num_envs": 256,
+  "num_steps": 64,
+  "endpoint_semantics": "fixed",
+  "telemetry": "probe-gradient cosine at every 0.5M training steps; evaluation every 5M steps",
+  "hardware": {
+    "host_platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.39",
+    "jax_backend": "gpu",
+    "jax_devices": [
+      "rocm:0"
+    ]
+  }
+}

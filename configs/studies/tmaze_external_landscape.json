@@ -1,0 +1,45 @@
+{
+  "study_id": "T3-TMAZE-EXTERNAL-LANDSCAPE",
+  "environment": {
+    "name": "PassiveTMaze",
+    "training_horizon": 100,
+    "evaluation_horizons": [100, 150, 200]
+  },
+  "training": {
+    "total_environment_steps": 50000000,
+    "num_envs": 1024,
+    "tbptt_steps": 16,
+    "log_interval_updates": 10,
+    "early_stop": {
+      "threshold": 0.98,
+      "consecutive_evaluations": 3
+    }
+  },
+  "seeds": [101, 102, 103, 104, 123, 456, 789],
+  "families": [
+    "GRU",
+    "LSTM",
+    "Mamba",
+    "LTI-Linear",
+    "Markovian",
+    "GLA",
+    "GTrXL-64",
+    "GTrXL-128"
+  ],
+  "results_schema": {
+    "required_columns": [
+      "family",
+      "seed",
+      "run_id",
+      "terminal_steps",
+      "terminal_status",
+      "H100",
+      "H150",
+      "H200"
+    ],
+    "terminal_status_values": ["early_stop", "budget_cap"]
+  },
+  "source_of_protocol": "data/paper-records/tmaze_external_landscape.csv",
+  "status": "launcher-recovery-required",
+  "note": "This records the frozen design recovered from the paper record. It does not substitute a nearby RoPE ablation as the launcher."
+}

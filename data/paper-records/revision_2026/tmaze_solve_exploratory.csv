@@ -1,0 +1,3 @@
+study,horizon,solve_threshold,exact_solved,exact_total,exact_wilson_low,exact_wilson_high,approximate_solved,approximate_total,approximate_wilson_low,approximate_wilson_high,fisher_two_sided_p,analysis_status
+Original factorial,200,0.9,7,10,0.39677814746114537,0.8922087325936989,0,10,0.0,0.2775327998628892,0.0030959752321981426,post hoc exploratory; pointwise and unadjusted
+Matched control,200,0.9,7,10,0.39677814746114537,0.8922087325936989,0,10,0.0,0.2775327998628892,0.0030959752321981426,post hoc exploratory; pointwise and unadjusted

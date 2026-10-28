@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+"""Build the frozen-paper table artifacts without a manuscript dependency.
+
+Most tables are retained verbatim because they include publication layout or
+external published-reference transcription.  The associative-capacity source
+table is regenerated from the versioned experiment record, rather than copied
+from a manuscript-side artifact.
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import shutil
+from pathlib import Path
+
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE = ROOT / "data" / "frozen-tables"
+CAPACITY_RECORD = ROOT / "data" / "paper-records" / "synthetic_capacity_480_cells.csv"
+RECORDS = ROOT / "data" / "paper-records"
+DEFAULT_OUTPUT = ROOT / "results" / "tables"
+
+
+def digest(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def write_text(output_dir: Path, name: str, text: str, entries: list[dict], source: str) -> None:
+    target = output_dir / name
+    target.write_text(text)
+    entries.append({"file": name, "sha256": digest(target), "kind": "tex", "source": source, "generated": True})
+    print(f"generated {target.relative_to(ROOT)}")
+
+
+def pm(mean: float, sd: float, places: int = 3) -> str:
+    return f"${mean:.{places}f}\\pm{sd:.{places}f}$"
+
+
+def build_project_tables(output_dir: Path, entries: list[dict]) -> set[str]:
+    generated: set[str] = set()
+    tmaze = pd.read_csv(RECORDS / "revision_2026" / "tmaze_factorial_cell_summary.csv")
+    rows = []
+    for model in ("Exact_NoRoPE", "Exact_RoPE", "Approx_NoRoPE", "Approx_RoPE"):
+        cell = tmaze[(tmaze.study == "factorial") & (tmaze.model == model)].set_index("horizon")
+        label = model.replace("_", "-")
+        rows.append(label + " & " + " & ".join(pm(cell.loc[h, "mean"], cell.loc[h, "sd"]) for h in (100, 150, 200)) + " \\\\")
+    write_text(output_dir, "tmaze_factorial_mean_sd.tex", "\n".join(rows + ["\\bottomrule"]) + "\n", entries,
+               "data/paper-records/revision_2026/tmaze_factorial_cell_summary.csv")
+    generated.add("tmaze_factorial_mean_sd.tex")
+
+    solve = pd.read_csv(RECORDS / "revision_2026" / "tmaze_solve_exploratory.csv")
+    lines = ["\\begin{tabularx}{\\linewidth}{l>{\\centering\\arraybackslash}X>{\\centering\\arraybackslash}Xc}", "\\toprule", "Study & Exact & Approx. & Fisher $p$ " + r"\\", "\\midrule"]
+    for row in solve.itertuples(index=False):
+        exact = f"{row.exact_solved}/{row.exact_total} $[{row.exact_wilson_low:.3f},{row.exact_wilson_high:.3f}]$"
+        approx = f"{row.approximate_solved}/{row.approximate_total} $[{row.approximate_wilson_low:.3f},{row.approximate_wilson_high:.3f}]$"
+        lines.append(f"{row.study} & {exact} & {approx} & ${row.fisher_two_sided_p:.5f}$ " + r"\\")
+    write_text(output_dir, "tmaze_solve_exploratory.tex", "\n".join(lines + ["\\bottomrule", "\\end{tabularx}"]) + "\n", entries,
+               "data/paper-records/revision_2026/tmaze_solve_exploratory.csv")
+    generated.add("tmaze_solve_exploratory.tex")
+
+    door = pd.read_csv(RECORDS / "doorkey_8x8" / "five_seed_summary.csv")
+    def door_rows(with_parameters: bool) -> list[str]:
+        result = []
+        for row in door.itertuples(index=False):
+            fields = [row.model]
+            if with_parameters:
+                fields += [f"{row.parameter_count:,}", f"{row.n}/{row.n}"]
+            fields += [f"{row.early_stop}/{row.step_cap}", pm(row.eval_mean_return_mean, row.eval_mean_return_sample_sd), pm(row.eval_success_rate_mean, row.eval_success_rate_sample_sd)]
+            result.append(" & ".join(fields) + " \\\\")
+        return result
+    main_rows = []
+    for row in door.itertuples(index=False):
+        main_rows.append(" & ".join((row.model, pm(row.eval_mean_return_mean, row.eval_mean_return_sample_sd), pm(row.eval_success_rate_mean, row.eval_success_rate_sample_sd), f"{row.early_stop}/{row.step_cap}")) + " " + r"\\")
+    write_text(output_dir, "doorkey_8x8_main.tex", "\n".join(["\\begin{tabular}{lrrr}", "\\toprule", "Model & Eval. return & Success rate & E/C " + r"\\", "\\midrule"] + main_rows + ["\\bottomrule", "\\end{tabular}"]) + "\n", entries,
+               "data/paper-records/doorkey_8x8/five_seed_summary.csv")
+    generated.add("doorkey_8x8_main.tex")
+    write_text(output_dir, "doorkey_8x8_summary.tex", "\n".join(["\\begin{tabular}{lrrrrr}", "\\toprule", "Model & Parameters & Runs & E/C & Eval. return & Success rate " + r"\\", "\\midrule"] + door_rows(True) + ["\\bottomrule", "\\end{tabular}"]) + "\n", entries,
+               "data/paper-records/doorkey_8x8/five_seed_summary.csv")
+    generated.add("doorkey_8x8_summary.tex")
+
+    scope = pd.read_csv(RECORDS / "final_verification" / "popgym_scope_examples.csv")
+    labels = [("SdLG-Exact", "Exact"), ("SdLG-Approx", "Approx."), ("PPO-GRU", "PPO-GRU"), ("PPO-Mamba", "PPO-Mamba"), ("PPO-GLA", "PPO-GLA")]
+    task_lines = ["% Generated by scripts/diagnostics/build_revision_verification.py", "\\begin{tabular}{llrrrrr}", "\\toprule", "Task & Operation & Exact & Approx. & PPO-GRU & PPO-Mamba & PPO-GLA " + r"\\", "\\midrule"]
+    for environment, task, operation in (("CountRecallEasy", "CountRecall", "accumulate/query"), ("ConcentrationEasy", "Concentration", "discrete matching")):
+        subset = scope[scope.Environment == environment].set_index("Model")
+        task_lines.append(f"{task} & {operation} & " + " & ".join(pm(subset.loc[key, 'mean'], subset.loc[key, 'std']) for key, _ in labels) + " " + r"\\")
+    write_text(output_dir, "popgym_scope_examples.tex", "\n".join(task_lines + ["\\bottomrule", "\\end{tabular}"]) + "\n", entries,
+               "data/paper-records/final_verification/popgym_scope_examples.csv")
+    generated.add("popgym_scope_examples.tex")
+    return generated
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
+    args = parser.parse_args()
+    args.output_dir = args.output_dir.resolve()
+    if not SOURCE.is_dir():
+        raise SystemExit(f"Frozen table inputs not found: {SOURCE}")
+
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    entries = []
+    generated = build_project_tables(args.output_dir, entries)
+    for source in sorted(SOURCE.iterdir()):
+        if not source.is_file():
+            continue
+        if source.name == "associative_capacity_480_cells.csv" or source.name in generated:
+            continue
+        target = args.output_dir / source.name
+        shutil.copy2(source, target)
+        entries.append({"file": source.name, "sha256": digest(source), "kind": source.suffix.lstrip(".")})
+        print(f"wrote {target.relative_to(ROOT)}")
+    capacity_target = args.output_dir / "associative_capacity_480_cells.csv"
+    shutil.copy2(CAPACITY_RECORD, capacity_target)
+    entries.append({
+        "file": capacity_target.name,
+        "sha256": digest(capacity_target),
+        "kind": "csv",
+        "source": str(CAPACITY_RECORD.relative_to(ROOT)),
+        "generated": True,
+    })
+    print(f"wrote {capacity_target.relative_to(ROOT)} from versioned experiment record")
+    (args.output_dir / "table_manifest.json").write_text(json.dumps(entries, indent=2) + "\n")
+    print(f"wrote {len(entries)} frozen table fixture(s)")
+
+
+if __name__ == "__main__":
+    main()

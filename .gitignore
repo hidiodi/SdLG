@@ -1,0 +1,36 @@
+# Python and local environments
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Experiment outputs: tracked inputs belong in data/, never here.
+results/
+outputs/
+checkpoints/
+wandb/
+wandb_exports/
+*.wandb
+*.log
+
+# Paper and plotting builds
+out/
+tmp/
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.toc
+
+# Editors and secrets
+.env
+.idea/
+.vscode/
+.DS_Store

@@ -1,0 +1,54 @@
+{
+  "study_id": "MINIGRID-LOCALITY-EXPANSION-2026",
+  "git_commit": "837047742229f4db0c3cfc54ceea293255fd7f0e",
+  "git_worktree_dirty": true,
+  "runner_sha256": "e18a31c316a04ba18e4bcd34ff04e209756e1444a1455e5dcbf2d1770cfa2fdc",
+  "argv": [
+    "scripts/diagnostics/architecture/swa_ablation/swa_ablation.py",
+    "--seeds",
+    "42,54,99,123,456,111,222,333,444,789,1001,1002,1003,1004,1005",
+    "--conditions",
+    "SdLG-SWA,SdLG-None",
+    "--fixed-endpoint",
+    "--overwrite",
+    "--output",
+    "/home/coins/PycharmProjects/JupyterProject/papers/writing/generated_artifacts/revision_2026/minigrid_locality_raw.csv",
+    "--manifest",
+    "/home/coins/PycharmProjects/JupyterProject/papers/writing/generated_artifacts/revision_2026/minigrid_locality_run_manifest.json"
+  ],
+  "runner": "scripts/diagnostics/architecture/swa_ablation/swa_ablation.py",
+  "output_csv": "/home/coins/PycharmProjects/JupyterProject/papers/writing/generated_artifacts/revision_2026/minigrid_locality_raw.csv",
+  "seeds": [
+    42,
+    54,
+    99,
+    123,
+    456,
+    111,
+    222,
+    333,
+    444,
+    789,
+    1001,
+    1002,
+    1003,
+    1004,
+    1005
+  ],
+  "conditions": [
+    "SdLG-SWA",
+    "SdLG-None"
+  ],
+  "fixed_endpoint": true,
+  "total_timesteps": 10000000,
+  "num_envs": 256,
+  "num_steps": 64,
+  "endpoint_semantics": "fixed",
+  "hardware": {
+    "host_platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.39",
+    "jax_backend": "gpu",
+    "jax_devices": [
+      "rocm:0"
+    ]
+  }
+}

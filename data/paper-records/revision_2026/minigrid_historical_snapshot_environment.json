@@ -1,0 +1,23 @@
+{
+  "study_id": "MINIGRID-LOCALITY-EXPANSION-2026",
+  "git_commit": "837047742229f4db0c3cfc54ceea293255fd7f0e",
+  "runner_sha256": "e18a31c316a04ba18e4bcd34ff04e209756e1444a1455e5dcbf2d1770cfa2fdc",
+  "platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "jax_backend": "gpu",
+  "jax_devices": [
+    "rocm:0"
+  ],
+  "rocm_device_summary": "Marketing Name:          AMD Ryzen 7 3800X 8-Core Processor",
+  "packages": {
+    "jax": "0.6.0",
+    "jaxlib": "0.6.0",
+    "flax": "0.10.7",
+    "optax": "0.2.8",
+    "numpy": "2.3.1",
+    "xminigrid": "0.9.3",
+    "craftax": "1.4.5",
+    "gymnax": "0.0.9",
+    "distrax": "0.1.5"
+  }
+}

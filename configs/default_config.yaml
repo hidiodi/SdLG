@@ -1,0 +1,11 @@
+defaults:
+  - env: craftax
+  - model: hybrid
+  - training: purejaxrl
+  - _self_
+
+project_name: "dlr_hybrid"
+use_wandb: false
+tags: ""
+seed: 42
+results_csv_path: "results/metrics.csv"

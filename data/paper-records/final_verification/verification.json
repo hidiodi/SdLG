@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "checks": 75,
+  "failed_checks": [],
+  "headline_claims": 8,
+  "excluded_from_manuscript": {
+    "ggs_alpha_0_exploratory": "papers/writing/generated_artifacts/revision_2026/ggs_alpha_sweep_raw.csv",
+    "minigrid_historical_five": "papers/writing/generated_artifacts/fig5_minigrid_swa.csv",
+    "b1_rank_sweep": "halted singleton and unfinished run; no comparative evidence"
+  },
+  "unresolved": [
+    "Full run-time dirty-worktree snapshots and checkpoints are absent from the inspected local W&B run directories.",
+    "Equal git commits/configurations/package lists do not establish bitwise implementation identity or statistical independence.",
+    "The cause of the between-study Exact baseline difference is not identified; no cross-study pooled estimate is justified."
+  ]
+}

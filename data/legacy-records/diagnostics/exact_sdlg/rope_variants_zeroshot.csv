@@ -1,0 +1,10 @@
+H_train,model,seed,val_H100,val_H150,val_H200,val_H250
+100,Exact_NoRoPE,42,1.0,1.0,1.0,0.0
+100,Exact_FastRoPE,42,1.0,1.0,1.0,0.0
+100,Exact_SlowRoPE,42,1.0,0.4921875,0.4921875,0.0
+100,Exact_ScaledRoPE,42,1.0,1.0,1.0,0.0
+100,Exact_StandardDimRoPE,42,1.0,0.4921875,0.4921875,0.0
+100,Exact_TimeWarpRoPE,42,1.0,1.0,1.0,0.0
+100,Exact_FastRoPE,42,1.0,1.0,1.0,0.0
+100,Exact_FastRoPE,54,0.4921875,0.4921875,0.4921875,0.0
+100,Exact_FastRoPE,99,1.0,1.0,0.4921875,0.0

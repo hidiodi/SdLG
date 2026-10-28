@@ -1,0 +1,71 @@
+[project]
+name = "sdlg"
+version = "0.1.0"
+description = "Reproducible experiments for SdLG in partially observable reinforcement learning."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+dependencies = [
+    "chex",
+    "craftax",
+    "distrax",
+    "flax>=0.10.4",
+    "gymnax",
+    "hydra-core",
+    "jax==0.6.0",
+    "jax-rocm7-pjrt==0.6.0",
+    "jax-rocm7-plugin==0.6.0",
+    "jaxlib @ https://github.com/ROCm/rocm-jax/releases/download/rocm-jax-v0.6.0/jaxlib-0.6.0-cp312-cp312-manylinux2014_x86_64.whl",
+    "mazelib>=0.9.16",
+    "memory-gym",
+    "networkx",
+    "numpy",
+    "omegaconf",
+    "openai",
+    "optax>=0.2.8",
+    "orbax-checkpoint>=0.12.0",
+    "pandas",
+    "popgym",
+    "pydantic>=2.13.3",
+    "pydantic-settings>=2.14.0",
+    "pytest",
+    "pytest-cov>=7.1.0",
+    "pytest-mock>=3.15.1",
+    "python-dotenv",
+    "requests>=2.33.1",
+    "rlax",
+    "scikit-learn>=1.9.0",
+    "scipy",
+    "tiktoken>=0.12.0",
+    "wandb",
+    "xminigrid>=0.9.3",
+]
+
+[project.optional-dependencies]
+dev = ["mypy", "ruff"]
+analysis = ["matplotlib", "seaborn"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.ruff]
+src = ["src", "scripts"]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
