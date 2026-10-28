@@ -1,0 +1,17 @@
+\section{Introduction}
+\label{sec:intro}
+
+Recurrent memory in partially observable reinforcement learning must do more than retain a distant observation: an agent may need to address an association, revise it without damaging others, and execute the resulting state efficiently. Overall return conflates these demands. Online learning adds another distinction because recurrent state can cross truncated backpropagation through time (TBPTT) boundaries even when gradients cannot; forward retention is therefore not long-range credit assignment.
+
+We develop Stabilized decoupled Linear Gated Recurrence (SdLG), a recurrent PPO architecture with gated associative memory, configurable execution, positional phase, local processing, and actor-gradient routing. We evaluate its configurations against established recurrent baselines, including GRU, LSTM, Mamba, GLA, and GTrXL, across complementary delayed-retention, spatial-control, POPGym, and Craftax protocols. Formulation controls and independent synthetic diagnostics then examine specific architectural choices and associative-memory operations.
+
+Many of these mechanisms were developed for sequence modeling in language rather than online reinforcement learning. We ask whether they carry over to recurrent PPO in partially observable tasks: where do they help, where do they fail to help, and what do they cost?
+
+Here, \emph{operational boundaries} are the tested tasks, memory operations, configurations, horizons, and execution costs under which a mechanism helps, fails to help, or introduces a trade-off. They are not a discovered maximum retention horizon or a universal performance frontier.
+
+Our contributions are as follows:
+\begin{enumerate}
+    \item \textbf{Architecture integration:} a configurable recurrent PPO architecture combining associative execution, positional phase, local processing, and actor-gradient-routing mechanisms.
+    \item \textbf{Memory behavior:} cross-task comparisons on T-Maze, DoorKey, and POPGym, plus independent retrieval and reassignment diagnostics.
+    \item \textbf{Operational trade-offs:} configuration-specific component interventions and systems measurements distinguishing carried-state size, latency, and training-loop throughput.
+\end{enumerate}

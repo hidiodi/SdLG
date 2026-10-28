@@ -1,0 +1,149 @@
+\documentclass{article}
+
+% Recommended packages for ICML
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\providecommand{\theHalgorithm}{\arabic{algorithm}}
+
+\usepackage[hyperfootnotes=false]{hyperref}
+\hypersetup{hidelinks}
+
+% Use the ICML layout while providing the thesis title-page information
+% separately and suppressing the conference-style notice.
+\usepackage[preprint]{icml2026}
+\hypersetup{
+  pdftitle={Operational Boundaries of a Modular Recurrent-Memory Architecture in Partially Observable Reinforcement Learning},
+  pdfauthor={Tim Schweitzer},
+  pdfsubject={Master's thesis manuscript},
+  pdfkeywords={partially observable reinforcement learning, recurrent memory, associative memory}
+}
+
+% Math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+
+\usepackage{placeins}
+\usepackage{balance}
+\usepackage{float}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+% Cleveref for formatting cross-references
+\usepackage[capitalize,noabbrev]{cleveref}
+
+% Listing styling for code blocks
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+\definecolor{thesisblue}{RGB}{31,78,121}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+% Theorems
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Running title
+\icmltitlerunning{Operational Boundaries in Partially Observable RL}
+
+\begin{document}
+
+\pagenumbering{gobble}
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+\vspace*{1.3cm}
+{\large Ravensburg-Weingarten University of Applied Sciences (RWU)\par}
+
+\vspace{1.7cm}
+{\color{thesisblue}\rule{0.72\textwidth}{1.1pt}\par}
+\vspace{1.25cm}
+{\Large\bfseries Master's Thesis\par}
+\vspace{1.05cm}
+{\LARGE\bfseries
+Operational Boundaries of a Modular Recurrent-Memory Architecture in Partially Observable Reinforcement Learning\par}
+\vspace{1.25cm}
+{\color{thesisblue}\rule{0.72\textwidth}{1.1pt}\par}
+
+\vfill
+{\large Tim Schweitzer\par}
+\vspace{0.25cm}
+{\normalsize Matrikelnummer: 29844429\par}
+\vspace{0.45cm}
+{\normalsize October 2026\par}
+\vspace*{1.3cm}
+\end{titlepage}
+
+\clearpage
+\pagenumbering{arabic}
+
+\twocolumn[
+\icmltitle{Operational Boundaries of a Modular Recurrent-Memory Architecture in Partially Observable Reinforcement Learning}
+
+\begin{center}
+\textbf{Tim Schweitzer}
+\end{center}
+
+\begin{abstract}
+Partially observable reinforcement learning requires retention, associative retrieval, and revision under computational constraints, but whole-model rankings obscure these distinct demands. We introduce Stabilized decoupled Linear Gated Recurrence (SdLG), a modular architecture with configurable associative execution, positional phase, local processing, and gradient routing. Evaluations across Passive T-Maze, DoorKey, POPGym, and Craftax reveal task- and configuration-dependent architecture rankings. On Passive T-Maze, GTrXL-128 reaches mean return $1.000$ at the trained horizon but falls to $0.503$ at the unseen horizon $H=200$, whereas SdLG-Exact changes from $0.900$ to $0.851$. Exact also achieves the highest observed mean return and success rate in the five-seed DoorKey comparison with GRU and GTrXL. Synthetic diagnostics show greater sensitivity to addressing than value dimension and a replacement--preservation trade-off. Factorization reduces carried-state memory without reducing batch-256 latency. Together, the results characterize the tested operating boundaries rather than establishing a universally superior architecture.
+\end{abstract}
+]
+
+% The thesis title page carries the institutional and author information.
+\makeatletter
+\global\icml@noticeprintedtrue
+\makeatother
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related_work.tex}
+\input{sections/03_methodology.tex}
+\input{sections/04_experimental_setup.tex}
+\input{sections/05_main_results.tex}
+\input{sections/07_discussion.tex}
+
+\FloatBarrier
+\clearpage
+\bibliography{references}
+\bibliographystyle{icml2026}
+
+\newpage
+\input{sections/appendix.tex}
+
+\end{document}

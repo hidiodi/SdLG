@@ -1,0 +1,79 @@
+[
+  {
+    "file": "tmaze_factorial_mean_sd.tex",
+    "sha256": "3f740fc4c74822eb7254affe71b1d5fd60c25feec3158a21afed80a189203465",
+    "kind": "tex",
+    "source": "data/paper-records/revision_2026/tmaze_factorial_cell_summary.csv",
+    "generated": true
+  },
+  {
+    "file": "tmaze_solve_exploratory.tex",
+    "sha256": "e1faf15c123dbbef56a6cd9803a1aceb5b2582363d8335be15651df8a51c9e18",
+    "kind": "tex",
+    "source": "data/paper-records/revision_2026/tmaze_solve_exploratory.csv",
+    "generated": true
+  },
+  {
+    "file": "doorkey_8x8_main.tex",
+    "sha256": "a360f1758e219ab7460a64cd5a66ac1b6f5ed11cabd40e5b0e964b5485a35488",
+    "kind": "tex",
+    "source": "data/paper-records/doorkey_8x8/five_seed_summary.csv",
+    "generated": true
+  },
+  {
+    "file": "doorkey_8x8_summary.tex",
+    "sha256": "8a3341c89bdf8bf3c49df58c63d5269cb27a6ed0142d96148ed1cd26f485d3ba",
+    "kind": "tex",
+    "source": "data/paper-records/doorkey_8x8/five_seed_summary.csv",
+    "generated": true
+  },
+  {
+    "file": "popgym_scope_examples.tex",
+    "sha256": "9f686133f3d556edfebb95632260ec561b943804a383b25ef0ac293dc3f9348a",
+    "kind": "tex",
+    "source": "data/paper-records/final_verification/popgym_scope_examples.csv",
+    "generated": true
+  },
+  {
+    "file": "doorkey_8x8_interim_summary.tex",
+    "sha256": "4937314b47b3f042f46d6a30126c08e2d9b2ce78a830486e7cedabe8555f2c63",
+    "kind": "tex"
+  },
+  {
+    "file": "doorkey_8x8_runs.tex",
+    "sha256": "2af217fc35a2b93a99b33ff3f4227d68b4ef6b93dda5373124735b934ff2cb89",
+    "kind": "tex"
+  },
+  {
+    "file": "overwrite_contrasts.tex",
+    "sha256": "871d2c37408be2e0b4cea486c1786dcba184e926c1df750e54d52d2485334d67",
+    "kind": "tex"
+  },
+  {
+    "file": "popgym_published_easy_1.tex",
+    "sha256": "0b01795efe6f2950f8a8b27e17df73fb2d39b5ca34ec5bd12e99f1a5dbd47a02",
+    "kind": "tex"
+  },
+  {
+    "file": "popgym_published_easy_2.tex",
+    "sha256": "6d8f23d7709ed91acfc730422665e01c41346659198eb7a37d84e7ef03eec432",
+    "kind": "tex"
+  },
+  {
+    "file": "popgym_published_medium_1.tex",
+    "sha256": "59a574b844c721747f0027cf9430e9df50a3c34cd029353f6db31c1353c71ea7",
+    "kind": "tex"
+  },
+  {
+    "file": "popgym_published_medium_2.tex",
+    "sha256": "9fb1fa972399276910953e4e9f70cf4d9d33f8cd06df7f54e36296e799d5eb84",
+    "kind": "tex"
+  },
+  {
+    "file": "associative_capacity_480_cells.csv",
+    "sha256": "d7ea4578ebc1c0ff79251e103293b831534558770eabefdac0d214fd480c5d8e",
+    "kind": "csv",
+    "source": "data/paper-records/synthetic_capacity_480_cells.csv",
+    "generated": true
+  }
+]

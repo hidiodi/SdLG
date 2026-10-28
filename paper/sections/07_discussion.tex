@@ -1,0 +1,22 @@
+\balance
+\section{Design Implications and Operating Boundaries}
+\label{sec:discussion}
+
+The results address the research question along three dimensions: where the tested mechanisms help, where they fail to help, and what they cost.
+
+The protocols separate seeded task-level evaluations from controlled memory-operation diagnostics and systems measurements. Matched controls narrow configuration differences, whereas cross-family benchmarks provide broader capacity-unmatched context; each result is therefore interpreted according to its endpoint and controls.
+
+\paragraph{Evaluate retention, retrieval, and revision as separate capabilities.}
+Across T-Maze, DoorKey, POPGym, and Craftax, observed architecture orderings depend on the task, horizon, configuration, and evaluation metric. GTrXL performs strongly at the trained T-Maze horizon but deteriorates at longer unseen delays; Exact has the highest observed mean in the reported DoorKey comparison, while POPGym and Craftax favor other architectures in several settings. Internal SdLG formulation controls provide additional evidence that execution choices can substantially alter behavior. These comparisons characterize the tested operating regimes without establishing general architectural superiority.
+
+\paragraph{Evaluate memory and compute efficiency separately.}
+Carried-state size, warmed recurrent-step latency, and end-to-end loop SPS measure different costs. Factorization reduces carried state here without reducing measured one-step latency, while loop SPS also includes environment interaction, optimization, data movement, and logging. Efficiency claims must therefore name both the metric and implementation context.
+
+\paragraph{Validate components in each configuration.}
+The SWA and actor-gradient studies test different formulations and tasks; their results do not define context-independent component effects. Components therefore require evaluation in each task and architecture.
+
+\paragraph{Limitations.}
+The matched Exact--Approximate comparison does not isolate a single architectural change. Matched NoRoPE selection followed the factorial and was not prospectively independent. Cross-family T-Maze results compare the evaluated configurations rather than parameter-matched architectures. The available compute budget constrained seed counts and the breadth of cross-family tuning and Exact-specific component studies. Intervals are unadjusted, solve analyses exploratory, and $H>200$ untested. Approximate/Hybrid interventions need not transfer to Exact. The actor-gradient study has five pairs. POPGym and Craftax compare models of different capacities.
+
+\section{Conclusion}
+No single recurrent architecture leads across all evaluated tasks and operating conditions. GTrXL, Exact, GRU, GLA, Mamba, and Approximate exhibit different observed strengths across memory demands, horizons, and computational constraints. The synthetic diagnostics separate addressing sensitivity from the replacement--preservation trade-off, while the component interventions show configuration-dependent effects. Factorization reduces carried state but not measured latency, and Exact has the lowest measured Craftax training-loop throughput. The contribution is an empirical account of the tested operating boundaries.

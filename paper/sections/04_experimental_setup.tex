@@ -1,0 +1,54 @@
+\section{Experimental Setup}
+\label{sec:setup}
+
+The experimental unit is a seeded training run or an independently seeded retrieval draw. We report seed-level outcomes for the small-sample studies, separate fixed endpoints from early stopping, and preserve right-censoring in T-Maze.
+
+\subsection{Common Training and Evaluation Semantics}
+
+We train recurrent policies with PPO and GAE over rollout chunks of length $T$~\cite{schulman2015high,schulman2017proximal}. State is carried but gradient-detached across nonterminal chunk boundaries and cleared at episode termination; Appendix~\ref{app:implementation_details} gives the equations and mask semantics.
+
+The studies address complementary questions. DoorKey, POPGym, and the Craftax landscape provide cross-family task comparisons; T-Maze tests delayed retention across recurrent baselines and includes a controlled Exact--Approximate comparison. MemoryS16 and actor-gradient scaling are formulation-specific interventions, associative retrieval and corrective overwrite are synthetic diagnostics, and the matched state/latency and Craftax cross-$T$ studies characterize computational behavior. Appendix~\ref{app:repro_map} maps every study to its endpoint, seed coverage, and evidence.
+
+\subsection{Passive T-Maze Retention Experiments}
+
+\paragraph{Long-horizon state execution and phase.}
+In Passive T-Maze~\cite{ni2023when}, a binary cue appears at reset and must be recalled at a decision junction at step $H$; matching one of two actions to the cue yields return 1, so an uninformed policy has expected return $0.5$. We compare the executed Exact and Approximate configurations with RoPE/NoRoPE at $H_{\mathrm{train}}=100$ under $T=16$, then evaluate $H=100,150,200$. Exact has three local--full-matrix-associative blocks; Approximate alternates local--factorized-associative--local and routes its $\alpha=0.1$ attenuated representation to both PPO heads. The factorial treats the four combinations as complete configurations.
+
+Ten seeds per cell train up to 50M steps. A run stops after three consecutive logged training-episode mean returns reach $0.98$ or is right-censored; the resulting parameters are evaluated at $H=100,150,200$. Terminal step and endpoint returns are distinct.
+
+For descriptive solve counts, a run is solved when terminal deterministic success over 256 episodes is at least $0.90$; an episode succeeds at return $\geq0.99$. This differs from the training stopping rule; return remains primary and threshold inference is post hoc and exploratory. The 200-step environment limit makes $H=200$ the largest valid evaluation horizon; longer horizons are untested.
+
+\paragraph{Matched state execution.}
+A matched control fixes the three-block local layout, NoRoPE, and common unattenuated actor--critic trunk ($\alpha=1$) while comparing full-matrix Exact with rank-16 factorized Approximate (16 total stored rows per layer). NoRoPE was selected after examining the factorial, where it was the best Exact phase setting, so the choice was not prospectively independent. The control uses ten independent runs per cell, with $H=200$ primary. Appendix~\ref{app:tmaze_matched_execution} records the configuration and checks.
+
+\paragraph{Cross-family T-Maze baselines.}
+We evaluate GRU, LSTM, Mamba, LTI-Linear, Markovian, GLA, GTrXL-64, and GTrXL-128 policies on Passive T-Maze at $H=100$ and $T=16$. Seven seeds per configuration use the same 50M-step cap, early-stopping rule, and terminal-policy evaluations at $H\in\{100,150,200\}$ as the SdLG studies. The model families differ in parameter count, and the studies use independent seed-level samples. Cross-family results therefore characterize the evaluated configurations rather than parameter-matched architecture effects. Appendix~\ref{app:tmaze_external_landscape} reports the outcomes and summaries.
+
+\subsection{Component Interventions}
+
+\paragraph{Local processing and shared-gradient coupling.}
+Within the evaluated SdLG-Approximate formulation, XLand-MiniGrid's MemoryS16 environment~\cite{minigrid,nikulin2024xland} compares SWA enabled with SWA bypassed at a fixed endpoint. Each condition contains 15 runs, and uncertainty is estimated using an independent seed-level bootstrap.
+
+The Craftax-Classic actor-gradient-scale study~\cite{matthews2024craftax} uses the Hybrid formulation and compares $\alpha=0.1$ and $1.0$ over five seeds at $T=64$ and 20,152,320 steps. Matched initializations, random-number streams, and evaluation seeds motivate paired resampling, although realized trajectories may diverge. Probe cosine is aggregated within seed before condition summaries and is not treated as a mediator.
+
+\subsection{Independent Diagnostics and Benchmark Context}
+
+\paragraph{Independent retrieval diagnostic.}
+The controlled associative-retrieval factorial crosses load $N$, addressing dimension $d_k$, and value dimension $d_v$. It writes $N$ normalized associations into a delta-updated matrix state:
+\begin{align}
+\widehat v_t&=M_t^\top k_t,\qquad e_t=v_t-\widehat v_t,\\
+M_{t+1}&=M_t+\frac{c}{\lVert k_t\rVert_2^2+10^{-5}}k_te_t^\top,
+\label{eq:capacity_update}
+\end{align}
+with $M_0=0$ and fixed correction coefficient $c=0.125$. Each of the 48 cells contains ten draws; retrieval quality is the mean cosine similarity between each retrieved value and its target. The factorial characterizes finite-regime retrieval behavior of this synthetic recurrence, separately from policy optimization and environment feedback.
+Here $k_t\in\mathbb{R}^{d_k}$ and $v_t\in\mathbb{R}^{d_v}$ are the normalized key and target value, $\widehat v_t$ is the current retrieval, $e_t$ is its correction error, and $M_t\in\mathbb{R}^{d_k\times d_v}$ is the memory state. The overwrite diagnostic below uses its reported coefficient $\eta$ directly and is a separate protocol.
+This diagnostic does not execute SdLG-Exact: it omits Exact's learned decay and write gates, positive ELU feature map, normalizer state $z_t$, and normalized query read. It characterizes only the stated Delta recurrence.
+
+\paragraph{Corrective overwrite diagnostic.}
+A synthetic reassignment protocol tests the corrective-update motivation for fast weights~\cite{schlag2021linear}: it replaces one quarter of the stored values and measures target overwrite separately from non-target preservation. Additive memory, a fixed-gated proxy, and normalized Delta updates with $\eta\in\{0.25,0.5,1.0\}$ share ten draws per $(N,d_k,d_v)$ cell.
+
+\paragraph{DoorKey cross-family evaluation.}
+MiniGrid-DoorKey-8x8 compares SdLG-Exact, PPO-GRU, and PPO-GTrXL on seeds $\{42,54,99,123,456\}$ with a shared encoder, PPO settings, $512$ environments, and $T=64$. Training stops after three consecutive logged returns reach $0.96$, or at the 20M-step cap. Terminal stochastic-policy evaluation uses 256 episodes; success means positive return. We report five-run means, sample SDs, and early-stop/cap counts. Capacities differ (1.635M, 0.327M, and 0.969M parameters, respectively). This comparison does not test the MemoryS16 SWA intervention; Appendix~\ref{app:doorkey_8x8} gives run-level endpoints and evaluation seeds.
+
+\paragraph{Cross-architecture and systems comparisons.}
+The matched state/latency measurement evaluates the two constructions at batches 1 and 256 using 300 synchronized timings after 50 warmups; timings are replicates, not trained-policy seeds. The capacity-unmatched Craftax comparison uses $T=64$ and 50M steps: returns are final logged training-episode means and SPS covers the full training loop. A five-seed cross-$T$ experiment reports cells at $T\in\{16,32,64,128\}$. Because $T$ also changes GAE and PPO update structure, this is a configuration response. The POPGym evaluation suite~\cite{morad2023popgym} covers 16 Easy and 7 Medium tasks; Appendix~\ref{app:experiment_protocols} specifies task-specific model, seed, endpoint, and remaining provenance coverage.

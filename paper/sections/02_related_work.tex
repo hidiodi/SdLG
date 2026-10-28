@@ -1,0 +1,18 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Recurrent memory in partially observable RL.}
+Partially observable agents construct state from observation histories~\cite{kaelbling1998planning,sutton2018reinforcement}. LSTM and GRU are standard gated baselines~\cite{hochreiter1997long,cho2014learning}; GTrXL modifies Transformer-XL for stable RL training~\cite{parisotto2020stabilizing}. Recurrent agents are commonly used POMDP baselines~\cite{ni2022recurrent}, while recent studies distinguish memory from long-term credit assignment and compare recurrent and Transformer inductive biases~\cite{ni2023when,lu2024rethinking}.
+Recent RL-specific work broadens this picture: memory traces provide compact exponential summaries with theoretical analysis and online-control experiments, while Memory Gym reports different GRU and Transformer-XL orderings across finite and endless memory tasks~\cite{eberhard2025memory,pleines2025memorygym}. Together, these studies motivate evaluating both memory representation and task regime.
+
+\paragraph{Linear attention, state-space, and associative recurrence.}
+Linear Transformers express kernel attention as recurrent outer-product state~\cite{katharopoulos2020transformers}, and fast-weight programmers make the key--value interpretation explicit~\cite{schlag2021linear}. GLA adds data-dependent gating~\cite{yang2024gated}; DeltaNet adds targeted Delta-rule correction~\cite{yang2024delta}; and Gated DeltaNet combines correction with forgetting gates and studies sliding-window hybrids~\cite{yang2025gateddelta}. SdLG-Exact instead uses the normalized gated additive recurrence defined in Section~\ref{sec:method}; the Delta rule is evaluated only in synthetic diagnostics. Other recurrent designs include RetNet, mLSTM, Mamba, and AGaLiTe's compact factorized recurrence~\cite{sun2023retentive,beck2024xlstm,gu2023mamba,pramanik2024agalite}. SdLG-Approx modifies the latter design for the evaluated online-RL configurations.
+
+\par\vspace{0.45\baselineskip}\noindent\textbf{Local--global processing.}
+Griffin interleaves recurrent and local-attention temporal-mixing blocks across depth~\cite{de2024griffin}. SdLG instead applies sliding-window attention and then associative recurrence sequentially inside each reference block. RoPE supplies the separately controlled positional phase~\cite{su2024roformer}.
+
+\par\vspace{0.45\baselineskip}\noindent\textbf{Shared actor--critic representations.}
+PPG separates policy/value optimization into phases, DAAC/IDAAC separates representations and adds invariance objectives, and PCGrad projects conflicting task gradients~\cite{cobbe2021phasic,raileanu2021decoupling,yu2020gradient}. These are distinct from SdLG's actor-gradient scaling during simultaneous actor--critic training.
+
+\paragraph{Research gap and contribution.}
+Prior work establishes gated associative recurrence, factorized recurrent state, local--global processing, and methods for managing actor--critic optimization across sequence modeling and online RL. Results obtained under different architectures, objectives, and tasks do not directly determine how these mechanisms behave when integrated into recurrent PPO across separate measurements of retention, retrieval, revision, and execution cost. SdLG does not claim invention of these individual mechanisms; its contribution is their implemented integration, configuration-specific adaptation, and empirical characterization through controlled diagnostics and task-level comparisons.

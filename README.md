@@ -34,6 +34,19 @@ executed by the audit. See
 [`docs/MISSING_RELEASE_ITEMS.md`](docs/MISSING_RELEASE_ITEMS.md) for the
 remaining hardening work and limits on fresh-run validation.
 
+## Frozen manuscript
+
+The standalone manuscript source, its frozen tables and figures, and the
+compiled PDF are included in [`paper/`](paper/). Its reproduction appendix
+uses the public commands in this release. To rebuild the derived material and
+the PDF after installation, run:
+
+```bash
+uv run python scripts/reproduce.py tables --output-dir paper/artifacts
+uv run python scripts/reproduce.py figures --output-dir paper/plots/rebuilt
+(cd paper && latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex)
+```
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
