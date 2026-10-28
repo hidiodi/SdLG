@@ -27,8 +27,7 @@ def read(relative: str) -> list[dict[str, str]]:
 def verify() -> None:
     config = json.loads(CONFIG.read_text())
     patch = ROOT / config["implementation_patch"]
-    if not patch.is_file() or "chronological" in patch.read_text().lower():
-        # The compact patch intentionally contains executable changes only.
+    if not patch.is_file() or "new_swa_k = jnp.concatenate" not in patch.read_text():
         raise AssertionError("Execution-semantics patch is absent or malformed")
     endpoints = read("data/paper-records/execution_semantics_ablation/tmaze_seed_endpoints.csv")
     if len(endpoints) != 60:
