@@ -26,12 +26,19 @@ def data_rows(relative: str) -> list[dict[str, str]]:
         return list(csv.DictReader(stream))
 
 
+def display_path(path: Path) -> Path:
+    try:
+        return path.relative_to(ROOT)
+    except ValueError:
+        return path
+
+
 def save(fig: plt.Figure, output: Path, name: str) -> None:
     fig.tight_layout()
     for suffix, kwargs in (("png", {"dpi": 220}), ("pdf", {})):
         path = output / f"{name}.{suffix}"
         fig.savefig(path, bbox_inches="tight", **kwargs)
-        print(f"wrote {path.relative_to(ROOT)}")
+        print(f"wrote {display_path(path)}")
     plt.close(fig)
 
 

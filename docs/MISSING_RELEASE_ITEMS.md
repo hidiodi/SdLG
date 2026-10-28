@@ -22,7 +22,7 @@ has both.
 | P1 | Output contracts | Complete the same output-directory audit for T-Maze, MiniGrid locality, DoorKey, and the recovered Craftax launchers. POPGym and the three lightweight diagnostics are already isolated. |
 | P1 | Tables | Replace the remaining reference-only TeX artifacts with record-driven generators where underlying compact records suffice: DoorKey run/interim tables, overwrite contrasts, and the project Craftax summaries. Keep published POPGym reference tables as explicitly versioned external transcriptions. |
 | P2 | Figure visual regression | The empirical paper figures are generated and catalogued from tracked records. Add image-level visual-regression tolerances only if the submission venue requires pixel-stable figure rendering across Matplotlib versions. |
-| P1 | Automated tests | Add recurrent-semantics and aggregation tests: prefix scan, chunk carry, reset masking, TBPTT detachment, SWA ring-buffer/reset behavior, and table/figure numerical checks. |
+| P2 | Automated tests | A fast release test rebuilds all tracked tables and empirical figures and rechecks every frozen headline value. Add deeper recurrent-semantics unit tests (prefix scan, chunk carry, reset masking, TBPTT detachment, and SWA ring-buffer reset) if the implementation is refactored. |
 | P2 | Audit artifact | `reproduce.py audit` now writes checksummed runner, record, table, and figure inventory to `results/audit/audit_report.json`. Add per-command wall-clock and accelerator telemetry only if a release requires performance certification. |
 | P2 | Clean-room rehearsal | On a fresh clone, run installation, all command validations, table/figure generation, record verification, and one short smoke run per environment family. |
 

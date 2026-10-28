@@ -28,11 +28,18 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def display_path(path: Path) -> Path:
+    try:
+        return path.relative_to(ROOT)
+    except ValueError:
+        return path
+
+
 def write_text(output_dir: Path, name: str, text: str, entries: list[dict], source: str) -> None:
     target = output_dir / name
     target.write_text(text)
     entries.append({"file": name, "sha256": digest(target), "kind": "tex", "source": source, "generated": True})
-    print(f"generated {target.relative_to(ROOT)}")
+    print(f"generated {display_path(target)}")
 
 
 def pm(mean: float, sd: float, places: int = 3) -> str:
@@ -112,7 +119,7 @@ def main() -> None:
         target = args.output_dir / source.name
         shutil.copy2(source, target)
         entries.append({"file": source.name, "sha256": digest(source), "kind": source.suffix.lstrip(".")})
-        print(f"wrote {target.relative_to(ROOT)}")
+        print(f"wrote {display_path(target)}")
     capacity_target = args.output_dir / "associative_capacity_480_cells.csv"
     shutil.copy2(CAPACITY_RECORD, capacity_target)
     entries.append({
@@ -122,7 +129,7 @@ def main() -> None:
         "source": str(CAPACITY_RECORD.relative_to(ROOT)),
         "generated": True,
     })
-    print(f"wrote {capacity_target.relative_to(ROOT)} from versioned experiment record")
+    print(f"wrote {display_path(capacity_target)} from versioned experiment record")
     (args.output_dir / "table_manifest.json").write_text(json.dumps(entries, indent=2) + "\n")
     print(f"wrote {len(entries)} frozen table fixture(s)")
 
