@@ -240,7 +240,7 @@ Figure~\ref{fig:app_ggs_auxiliary} provides optimization telemetry complementary
 The entries below identify the executable family, protocol, and evidence for each reported result. Commands are collected in Appendix~\ref{app:repro_checklist}.
 
 \subsection{Study-Specific SdLG Hyperparameters}
-T-Maze uses $d_{\text{model}}=128$, three layers, $d_k=d_v=32$, $W=16$, an unfactorized Exact state, and Approximate rank 16. MiniGrid uses the same width, depth, key, and value dimensions with rank 4 and compares SWA enabled with bypassed. GGS uses $d_{\text{model}}=256$, four layers, $d_k=d_v=32$, rank 4, and $W=8$. The study records provide the remaining optimizer, rollout, seed, and endpoint fields.
+T-Maze uses $d_{\text{model}}=128$, three layers, $d_k=d_v=32$, $W=16$, an unfactorized Exact state, and an Approximate state with $r=16$ stored rows. In its NoRoPE condition, cosine symmetry leaves eight distinct row trajectories in exact arithmetic. MiniGrid uses the same width, depth, key, and value dimensions with $r=4$ and compares SWA enabled with bypassed. GGS uses $d_{\text{model}}=256$, four layers, $d_k=d_v=32$, $r=4$, and $W=8$. The study records provide the remaining optimizer, rollout, seed, and endpoint fields.
 
 \subsection{Craftax-Classic Open-World Survival}
 \begin{itemize}
@@ -299,7 +299,7 @@ Main Table~\ref{tab:tmaze_external_main} reports the baseline parameter counts, 
     \item \textbf{Objective:} Characterize long-horizon state execution and positional-phase behavior under severe gradient truncation ($T=16$).
     \item \textbf{Operational Question:} How do state execution and positional phase change trained- and unseen-horizon behavior when $H\gg T$? The boundary statistic tests for a localized shift in squared value-target error; it does not measure representation drift or bootstrap corruption directly.
     \item \textbf{Configuration ID:} \texttt{T1-TMAZE-EXECUTION-PHASE} \\ ($\to$ \path{scripts/diagnostics/exact_sdlg/exact_sdlg_tmaze_ablations.py}).
-    \item \textbf{Compared Variants:} \texttt{Exact\_NoRoPE}, \texttt{Exact\_RoPE} (unfactorized full-matrix state), \texttt{Approx\_RoPE}, and \texttt{Approx\_NoRoPE} (Approximate rank 16).
+    \item \textbf{Compared Variants:} \texttt{Exact\_NoRoPE}, \texttt{Exact\_RoPE} (unfactorized full-matrix state), \texttt{Approx\_RoPE}, and \texttt{Approx\_NoRoPE} (Approximate with $r=16$ stored rows; the NoRoPE cosine construction has eight duplicated row pairs).
     \item \textbf{Training Protocol:} $d_{\text{model}}=128$, three layers, $d_k=d_v=32$, $W=16$, $N_{\text{envs}}=1024$, $H_{\text{train}}=100$, $T=16$, 50M-step cap, and early stopping after three consecutive logged training returns reach $0.98$; learning rate $5\times 10^{-4}$ with 4 PPO epochs / 8 minibatches.
     \item \textbf{Evaluation Protocol \& Horizon:} In-domain evaluation at $H_{\text{train}}=100$ and zero-shot extrapolation to $H \in \{100, 150, 200\}$.
     \item \textbf{Seeds:} 10 random seeds ($42, 54, 99, 123, 456, 789, 111, 222, 333, 444$).
@@ -316,7 +316,7 @@ Early-stopping time does not track unseen-horizon return monotonically in the fa
 
 \subsection{Topology- and Gradient-Matched T-Maze Execution}
 \label{app:tmaze_matched_execution}
-The matched configuration ID \texttt{T1-TMAZE-MATCHED-EXECUTION} holds fixed three local--associative--gated-FFN blocks, $d_{\mathrm{model}}=128$, $d_k=d_v=32$, $W=16$, NoRoPE, and an unattenuated common actor--critic trunk ($\alpha=1$). It compares the full-matrix Exact and rank-16 factorized Approximate state-execution paths under this block layout. The ten runs per condition are analyzed as independent seed-level samples. Two short seed-42 validation runs are excluded; for seed 222, the completed Approximate run is used in place of an interrupted attempt. At $H=200$, Exact reaches $0.851\pm0.240$ and Approximate $0.500\pm0.008$; the independent-condition difference is $0.351\,[0.200,0.497]$.
+The matched configuration ID \texttt{T1-TMAZE-MATCHED-EXECUTION} holds fixed three local--associative--gated-FFN blocks, $d_{\mathrm{model}}=128$, $d_k=d_v=32$, $W=16$, NoRoPE, and an unattenuated common actor--critic trunk ($\alpha=1$). It compares the full-matrix Exact and factorized Approximate state-execution paths, with $r=16$ stored rows; under NoRoPE, cosine symmetry makes these eight pairs of duplicated trajectories in exact arithmetic. The ten runs per condition are analyzed as independent seed-level samples. Two short seed-42 validation runs are excluded; for seed 222, the completed Approximate run is used in place of an interrupted attempt. At $H=200$, Exact reaches $0.851\pm0.240$ and Approximate $0.500\pm0.008$; the independent-condition difference is $0.351\,[0.200,0.497]$.
 
 Matched Exact has nine successful early stops and one 50M-step-censored run (mean terminal step 9.08M); Matched Approximate has seven successful early stops and three censored runs (mean terminal step 26.18M). These training-time outcomes remain separate from the horizon-return analysis. It remains a formulation-level comparison: full-matrix versus factorized state, recurrence/update, normalized read, effective state size, and numerical path still change jointly, so it does not isolate rank alone.
 
@@ -618,7 +618,7 @@ The implementation carries recurrent state forward across a nonterminal chunk bo
 
 \subsection{Approximate Factorized Execution}
 \label{app:approximate_execution}
-The Approximate modification replaces each Exact matrix state with rank-$r$
+The Approximate modification replaces each Exact matrix state with $r$-row
 key and value factors $\widetilde K_t\in\mathbb{R}^{r\times d_k}$ and
 $\widetilde V_t\in\mathbb{R}^{r\times d_v}$, with $\theta_t\in\mathbb{R}^r$.
 Here $r$ is the total stored-row count per layer ($r=16$ in T-Maze), with no
@@ -657,7 +657,7 @@ AGaLiTe-style factorized recurrences can use time-dependent cosine modulation~\c
 \begin{equation}
     \theta_{j,t}=((1-d_t)\theta_{j,t-1}+\omega_j)\bmod 2\pi,\qquad \theta_{j,0}=0,
 \end{equation}
-where $d_t$ is the previous-transition termination flag and the fixed angular frequencies $\omega_j$ span the implementation's rank-frequency grid. The implementation applies a norm-preserving block-wise rotation $\mathcal{R}(u,\theta_{j,t})$ to a projected query or key vector $u$, so $\|\mathcal{R}(u,\theta)\|_2=\|u\|_2$. Phase advances before the current modulation, carries across nonterminal chunks, and resets with the episode state. The NoRoPE branch disables this rotation but uses $c_{t,j}=\cos(s_t\omega_j)$ to modulate queries, keys, and value writes, with $\omega_j\in\operatorname{linspace}(-\pi,\pi,r)$. Since cosine is even, $r=16$ gives eight pairs of equivalent modulation trajectories in exact arithmetic; it still denotes 16 stored rows, not an algebraic rank of eight. These are concrete phase-handling choices, not direct replications of standard self-attention RoPE. The main-text counter obeys $s_t=(s_{t-1}+1)(1-d_t)$ with zero initial carry. Consequently, the first fresh-start token uses $s_t=1$, whereas the first token after a flagged reset uses $s_t=0$. This distinction affects the NoRoPE cosine modulation; the running rotation instead resets before advancing its phase.
+where $d_t$ is the previous-transition termination flag and the fixed angular frequencies $\omega_j$ span the implementation's row-frequency grid. The implementation applies a norm-preserving block-wise rotation $\mathcal{R}(u,\theta_{j,t})$ to a projected query or key vector $u$, so $\|\mathcal{R}(u,\theta)\|_2=\|u\|_2$. Phase advances before the current modulation, carries across nonterminal chunks, and resets with the episode state. The NoRoPE branch disables this rotation but uses $c_{t,j}=\cos(s_t\omega_j)$ to modulate queries, keys, and value writes, with $\omega_j\in\operatorname{linspace}(-\pi,\pi,r)$. Since cosine is even, $r=16$ gives eight pairs of identical modulation trajectories. Because the projections, gates, and initial factor rows are shared across $j$, each pair remains identical under the NoRoPE recurrence; it stores 16 physical rows but has at most eight distinct factor trajectories in exact arithmetic. These are concrete phase-handling choices, not direct replications of standard self-attention RoPE. The main-text counter obeys $s_t=(s_{t-1}+1)(1-d_t)$ with zero initial carry. Consequently, the first fresh-start token uses $s_t=1$, whereas the first token after a flagged reset uses $s_t=0$. This distinction affects the NoRoPE cosine modulation; the running rotation instead resets before advancing its phase.
 
 \subsection{Sequential Ordering of Local and Global Pathways}
 \label{app:gradient_decoupling_proof}
